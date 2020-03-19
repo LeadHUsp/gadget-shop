@@ -8,6 +8,7 @@ import s from "./Product.module.scss";
 
 class ProductContainer extends Component {
   componentDidMount() {
+    console.log(this.props);
     this.props.requestProductData(
       this.props.match.params.slug,
       this.props.match.params.page
@@ -15,7 +16,6 @@ class ProductContainer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props);
     if (prevProps.match.params.page !== this.props.match.params.page) {
       this.props.requestProductData(
         this.props.match.params.slug,

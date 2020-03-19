@@ -31,7 +31,7 @@ const HomePage = (props) => {
                   <div
                     className={s.slide_image}
                     style={{
-                      backgroundImage: `url(http://localhost:1337${item.image.url})`
+                      backgroundImage: `url(${item.image})`
                     }}
                   ></div>
                   <div className={s.slide_description}>
@@ -59,7 +59,7 @@ const HomePage = (props) => {
               className={`col-xs-12 col-lg-6 ${s.card}`}
               key={item.id}
               style={{
-                backgroundImage: `url(https://pacific-depths-36780.herokuapp.com${item.main_image.url})`
+                backgroundImage: `url(${item.main_image})`
               }}
             >
               <div className={s.card_front}>
@@ -82,11 +82,7 @@ const HomePage = (props) => {
           {props.blog_items.map((item) => (
             <div className="col-xs-12 col-lg-4" key={item.id}>
               <NavLink to={`blog/${item.id}`} className={s.blog_link}>
-                <img
-                  src={`http://localhost:1337${item.image.url}`}
-                  alt="article"
-                  className={s.img}
-                />
+                <img src={`${item.image}`} alt="article" className={s.img} />
               </NavLink>
               <div className={s.description}>
                 <h4 className="pb-3">{item.title}</h4>
