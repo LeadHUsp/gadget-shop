@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:1337/"
+  baseURL: "https://pacific-depths-36780.herokuapp.com/"
 });
 
 export const NavigationApi = {
