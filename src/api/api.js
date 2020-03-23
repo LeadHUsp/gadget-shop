@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:1337/"
+  baseURL: "https://pacific-depths-36780.herokuapp.com/"
 });
 
 export const NavigationApi = {
@@ -21,8 +21,16 @@ export const HomeApi = {
   }
 };
 export const ProductApi = {
-  getProducts(slug, currentPage = 1, perPage = 3) {
-    return instance.get(`${slug}/?page=${currentPage}&_limit=${perPage}`);
+  getProducts(slug, currentPage = 1, perPage = 3, params) {
+    return instance.get(
+      `${slug}/?page=${currentPage}&_limit=${perPage}&${params}`
+    );
+  },
+  getFilterItems(slug) {
+    return instance.get(`${slug}/filter`);
+  },
+  getProductsWithFilter(slug, params) {
+    return instance.get(`${slug}?${params}`);
   }
 };
 

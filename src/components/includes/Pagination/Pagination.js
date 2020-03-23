@@ -9,6 +9,8 @@ const Pagination = (props) => {
 
   if (currentPage > 1 && currentPage < totalPages) {
     pages = [currentPage - 1, currentPage, currentPage * 1 + 1];
+  } else if (totalPages === 1 && currentPage === 1) {
+    pages = [currentPage];
   } else if (currentPage === totalPages && totalPages > 2) {
     pages = [currentPage - 2, currentPage - 1, currentPage];
   } else if (currentPage === 1 && totalPages > 2) {

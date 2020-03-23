@@ -60,7 +60,7 @@ export const requestPromoItems = () => {
 export const requestCategories = () => {
   return async (dispatch) => {
     let response = await HomeApi.getCategories();
-    console.log(response);
+    /* console.log(response); */
     dispatch(setCategoriesItems(response.data));
   };
 };

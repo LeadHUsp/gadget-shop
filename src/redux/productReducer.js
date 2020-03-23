@@ -2,12 +2,11 @@ import { ProductApi } from "../api/api";
 
 const SET_PRODUCT_DATA = "product/SET_PRODUCT_DATA";
 const SET_TOTAL_PAGES = "product/SET_TOTAL_PAGES";
-const SET_CURRENT_PAGE = "product/SET_CURRENT_PAGE";
 
 let initialState = {
   products_data: [],
   totalPages: 0,
-  currentPage: 1
+  perPage: 3
 };
 
 const productReducer = (state = initialState, action) => {
@@ -22,11 +21,7 @@ const productReducer = (state = initialState, action) => {
         ...state,
         totalPages: action.totalPages
       };
-    case SET_CURRENT_PAGE:
-      return {
-        ...state,
-        currentPage: action.currentPage
-      };
+
     default:
       return state;
   }
@@ -44,17 +39,16 @@ export const setTotalPages = (totalPages) => {
     totalPages
   };
 };
-export const setCurrentPage = (currentPage) => {
-  return {
-    type: SET_CURRENT_PAGE,
-    currentPage
-  };
-};
 
-export const requestProductData = (slug, currentPage, perPage) => {
+export const requestProductData = (slug, currentPage, perPage, params = "") => {
   return async (dispatch) => {
-    let response = await ProductApi.getProducts(slug, currentPage, perPage);
-    /*   console.log(response); */
+    let response = await ProductApi.getProducts(
+      slug,
+      currentPage,
+      perPage,
+      params
+    );
+    console.log(response);
     dispatch(setProductData(response.data));
     dispatch(setTotalPages(response.headers.x_totalpages));
   };
