@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import HomePageContainer from "./components/HomePage/HomePageContainer";
 import ProductContainer from "./components/Shop/Product/ProductContainer";
+import SingleProductContainer from "./components/Shop/SingleProduct/SingleProductContainer";
 import "./main.scss";
 
 class App extends Component {
@@ -12,8 +13,13 @@ class App extends Component {
         <Header />
         <Switch>
           <Route exact path="/" render={() => <HomePageContainer />} />
-          <Route path="/:slug/:page/:id" render={() => <ProductContainer />} />
-          <Route path="/:slug/:page" render={() => <ProductContainer />} />
+          <Route
+            exact
+            path="/:slug/:page"
+            render={() => <ProductContainer />}
+          />
+          {/*  <Route path="/:slug/:id" render={() => <SingleProductContainer />} /> */}
+
           <Route path="/:slug" render={() => <ProductContainer />} />
         </Switch>
       </Router>

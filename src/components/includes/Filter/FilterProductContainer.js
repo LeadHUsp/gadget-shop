@@ -30,17 +30,21 @@ class FilterProductContainer extends Component {
       params.push(`${param_name}=${param_value}`);
       params = params.join("&");
     }
-
+    console.log(params);
+    this.props.history.push(`/${this.props.slug}/`);
     this.props.setCheckBoxParams(params);
-    this.props.requestProductData(
+    /* this.props.requestProductData(
       this.props.slug,
       this.props.page,
       3,
-      `${params}${this.props.price_params}${this.props.sort_params}`
-    );
+      `${this.props.sort_params}${params}${this.props.price_params}`
+    ); */
   };
   shouldComponentUpdate(nextProps) {
     return nextProps.filter_items !== this.props.filter_items;
+  }
+  componentWillUnmount() {
+    this.props.setCheckBoxParams("");
   }
 
   render() {

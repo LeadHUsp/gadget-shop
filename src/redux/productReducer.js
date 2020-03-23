@@ -1,10 +1,12 @@
 import { ProductApi } from "../api/api";
 
 const SET_PRODUCT_DATA = "product/SET_PRODUCT_DATA";
+const SET_SINGLE_PRODUCT_DATA = "product/SET_SINGLE_PRODUCT_DATA";
 const SET_TOTAL_PAGES = "product/SET_TOTAL_PAGES";
 
 let initialState = {
   products_data: [],
+  single_product_data: [],
   totalPages: 0,
   perPage: 3
 };
@@ -15,6 +17,11 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         products_data: action.data
+      };
+    case SET_SINGLE_PRODUCT_DATA:
+      return {
+        ...state,
+        single_product_data: action.data
       };
     case SET_TOTAL_PAGES:
       return {
@@ -39,6 +46,12 @@ export const setTotalPages = (totalPages) => {
     totalPages
   };
 };
+export const setSingleProductData = (data) => {
+  return {
+    type: SET_SINGLE_PRODUCT_DATA,
+    data
+  };
+};
 
 export const requestProductData = (slug, currentPage, perPage, params = "") => {
   return async (dispatch) => {
@@ -48,9 +61,17 @@ export const requestProductData = (slug, currentPage, perPage, params = "") => {
       perPage,
       params
     );
-    console.log(response);
+    /* console.log(response); */
     dispatch(setProductData(response.data));
     dispatch(setTotalPages(response.headers.x_totalpages));
+  };
+};
+
+export const requestSingleProductData = (slug, id) => {
+  return async (dispatch) => {
+    let response = await ProductApi.getSingleProduct(slug, id);
+    console.log(response);
+    dispatch(setSingleProductData(response.data));
   };
 };
 

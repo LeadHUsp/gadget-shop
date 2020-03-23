@@ -10,6 +10,7 @@ const FilterProduct = (props) => {
           {props.values.map((value) => {
             return (
               <li key={value}>
+                {" "}
                 <label htmlFor={value} className={`${s.checkbox} ${s.bounce}`}>
                   <input
                     type="checkbox"
@@ -19,6 +20,7 @@ const FilterProduct = (props) => {
                     className={`${s.checkbox}`}
                     id={value}
                   />
+
                   <svg viewBox="0 0 21 21">
                     <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
                   </svg>

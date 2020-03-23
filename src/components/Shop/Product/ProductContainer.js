@@ -10,6 +10,7 @@ import SortFilter from "../../includes/SortFilter/SortFilter";
 
 class ProductContainer extends Component {
   componentDidMount() {
+    /* console.log(this.props); */
     this.props.requestProductData(
       this.props.match.params.slug,
       this.props.match.params.page
@@ -17,8 +18,11 @@ class ProductContainer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    /* console.log(this.props); */
-    if (prevProps.match.params.page !== this.props.match.params.page) {
+    console.log(this.props);
+    if (
+      prevProps.match.params.page !== this.props.match.params.page ||
+      prevProps.checkbox_params !== this.props.checkbox_params
+    ) {
       this.props.requestProductData(
         this.props.match.params.slug,
         this.props.match.params.page,
@@ -35,6 +39,7 @@ class ProductContainer extends Component {
             <FilterProductContainer
               slug={this.props.match.params.slug}
               page={this.props.match.params.page}
+              history={this.props.history}
             />
           </div>
           <div className={`col-9 ${s.catalog}`}>
