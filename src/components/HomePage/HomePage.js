@@ -3,6 +3,7 @@ import s from "./HomePage.module.scss";
 import Swiper from "react-id-swiper";
 import { NavLink } from "react-router-dom";
 import { dateTranslater } from "../utils/date";
+import { Circle } from "react-preloaders";
 
 const HomePage = (props) => {
   const params = {
@@ -87,13 +88,14 @@ const HomePage = (props) => {
               <div className={s.description}>
                 <h4 className="pb-3">{item.title}</h4>
                 <span className="small-txt">
-                  By {item.author} on {dateTranslater(item.updated_at)}
+                  By {item.author} on {dateTranslater(item.updatedat)}
                 </span>
                 <p className="pt-4">{item.annotation} </p>
               </div>
             </div>
           ))}
         </div>
+        <Circle customLoading={props.isLoading} color="#f6731c" />
       </div>
     </>
   );

@@ -60,6 +60,7 @@ let mapStateToProps = (state) => {
   return {
     products_data: state.products.products_data,
     totalPages: state.products.totalPages,
+    isLoading: state.products.isLoading,
     sort_params: state.filterProduct.sort_params,
     checkbox_params: state.filterProduct.checkbox_params,
     price_params: state.filterProduct.price_params

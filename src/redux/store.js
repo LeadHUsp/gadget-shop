@@ -4,12 +4,14 @@ import navReducer from "./navReducer";
 import homeReducer from "./homeReducer";
 import productReducer from "./productReducer";
 import filterProductReducer from "./filterProductReducer";
+import preloaderReducer from "./preloaderReducer";
 
 let reducers = combineReducers({
   navigation: navReducer,
   home: homeReducer,
   products: productReducer,
-  filterProduct: filterProductReducer
+  filterProduct: filterProductReducer,
+  preloader: preloaderReducer
 });
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));

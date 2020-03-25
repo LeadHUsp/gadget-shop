@@ -1,13 +1,34 @@
 import React, { Component } from "react";
+import { requestSingleProductData } from "../../../redux/productReducer";
 import { connect } from "react-redux";
-
+import { withRouter } from "react-router-dom";
+import SingleProduct from "./SingleProduct";
 class SingleProductContainer extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    console.log(this.props);
+    this.props.requestSingleProductData(
+      this.props.match.params.slug,
+      this.props.match.params.id
+    );
+  }
+  /* componentDidUpdate() {
+    console.log(this.props);
+  } */
   render() {
-    return <div>Single Product</div>;
+    return (
+      <>
+        <SingleProduct {...this.props.single_product_data} />
+      </>
+    );
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => {
+  return {
+    single_product_data: state.products.single_product_data
+  };
+};
 
-export default connect(mapStateToProps)(SingleProductContainer);
+export default withRouter(
+  connect(mapStateToProps, { requestSingleProductData })(SingleProductContainer)
+);

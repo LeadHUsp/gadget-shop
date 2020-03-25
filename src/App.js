@@ -13,14 +13,28 @@ class App extends Component {
         <Header />
         <Switch>
           <Route exact path="/" render={() => <HomePageContainer />} />
+          <Route exact path="/:slug" render={() => <ProductContainer />} />
           <Route
             exact
-            path="/:slug/:page"
+            path="/:slug/page_:page"
             render={() => <ProductContainer />}
           />
-          {/*  <Route path="/:slug/:id" render={() => <SingleProductContainer />} /> */}
 
-          <Route path="/:slug" render={() => <ProductContainer />} />
+          <Route
+            exact
+            path="/:slug/single_product/:id"
+            render={() => <SingleProductContainer />}
+          />
+          <Route
+            exact
+            path="/:slug/page_:page/single_product/:id"
+            render={() => <SingleProductContainer />}
+          />
+          {/*   <Route
+            exact
+            path="/single_product/:id"
+            render={() => <SingleProductContainer />}
+          /> */}
         </Switch>
       </Router>
     );

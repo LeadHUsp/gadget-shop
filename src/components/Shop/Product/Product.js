@@ -1,16 +1,26 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import s from "./Product.module.scss";
+import { Circle } from "react-preloaders";
 
 const Product = (props) => {
+  /*   console.log(href); */
+
+  console.log(props);
   return (
     <div className="row mx-0 justify-content-around py-4">
       {props.products_data.map((item) => (
         <div className={s.product_card} key={item.id}>
-          <NavLink className={s.product_link} to={item.id}>
+          <NavLink
+            className={s.product_link}
+            to={`/${props.match.params.slug}/single_product/${item.id}`}
+          >
             <img src={item.card_image} alt={item.title} />
           </NavLink>
-          <NavLink className={s.product_link} to={item.id}>
+          <NavLink
+            className={s.product_link}
+            to={`/${props.match.params.slug}/single_product/${item.id}`}
+          >
             {item.brand} {item.series} {item.internal_memory} Gb
           </NavLink>
 
@@ -32,6 +42,7 @@ const Product = (props) => {
           </button>
         </div>
       ))}
+      <Circle customLoading={props.isLoading} color="#f6731c" />
     </div>
   );
 };

@@ -25,7 +25,7 @@ const Pagination = (props) => {
     <div className={s.pagination_container}>
       <ul>
         <li>
-          <NavLink className={`${s.page_link} `} to={`/${props.slug}/1`}>
+          <NavLink className={`${s.page_link} `} to={`/${props.slug}/page_1`}>
             <i className="fas fa-angle-double-left"></i>
           </NavLink>
         </li>
@@ -36,14 +36,14 @@ const Pagination = (props) => {
             </li>
           ) : (
             <li key={page}>
-              <NavLink to={`/${props.slug}/${page}`}>{page}</NavLink>
+              <NavLink to={`/${props.slug}/page_${page}`}>{page}</NavLink>
             </li>
           )
         )}
         <li>
           <NavLink
             className={`${s.page_link} `}
-            to={`/${props.slug}/${totalPages}`}
+            to={`/${props.slug}/page_${totalPages}`}
           >
             <i className="fas fa-angle-double-right"></i>
           </NavLink>

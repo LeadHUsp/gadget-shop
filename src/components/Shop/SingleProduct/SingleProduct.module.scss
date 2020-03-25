@@ -1,0 +1,151 @@
+.catalog {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding-bottom: 60px;
+    padding-top: 30px;
+    background: #fff;
+
+    h3 {
+        display: block;
+        padding: 15px 0;
+    }
+}
+
+.slide {
+    flex-shrink: 0;
+    width: 100%;
+    position: relative;
+    transition-property: transform;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+
+    img {
+        max-width: 80%;
+        height: auto;
+    }
+}
+
+.tech_details {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0 15px;
+
+    ul {
+        li {
+            padding: 5px 0;
+        }
+    }
+}
+
+.price_block {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    text-transform: uppercase;
+    font-size: 35px;
+    color: #131313;
+    font-weight: bold;
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0 15px;
+
+    .price_value {
+        max-width: 100%;
+        flex: 0 0 100%;
+
+    }
+
+    .add_to_cart {
+        display: block;
+
+    }
+}
+
+.description {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0 15px;
+
+    line-height: 2;
+}
+
+.show {
+    max-height: unset;
+}
+
+.hide {
+    overflow-y: scroll;
+    max-height: 260px;
+}
+
+.toggler {
+    position: absolute;
+    padding: 0 5px;
+    border-radius: 5px;
+    bottom: -30px;
+    right: 5%;
+    background: none;
+    border: 1px solid #460482;
+    color: #460482;
+    cursor: pointer;
+}
+
+.select_options {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 17px;
+    cursor: pointer;
+
+    .options {
+        transition: 0.3s all;
+        border: 1px solid rgb(114, 114, 114);
+
+        &:hover {
+            background: linear-gradient(90deg, rgba(2, 136, 187, 1) 0%, rgba(0, 212, 255, 1) 100%);
+            color: #fff;
+        }
+    }
+
+    div {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 10px 0;
+    }
+
+    button {
+        background: none;
+        width: 30px;
+        border: none;
+        color: rgb(114, 114, 114);
+    }
+
+    .show_options {
+        display: block;
+    }
+
+    .hide_options {
+        display: none;
+    }
+}
+
+.add_to_cart {
+
+    display: inline-flex;
+    padding: 10px;
+    position: relative;
+    color: #fff;
+    background: linear-gradient(90deg, rgba(2, 136, 187, 1) 0%, rgba(0, 212, 255, 1) 100%);
+    border: none;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 5px;
+    cursor: pointer;
+}

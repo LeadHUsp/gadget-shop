@@ -1,4 +1,5 @@
 import { HomeApi } from "../api/api";
+import { setIsLoading } from "./preloaderReducer";
 
 const SET_PROMO_DATA = "home/SET_PROMO_DATA";
 const SET_CATEGORIES_DATA = "home/SET_CATEGORIES_DATA";
@@ -55,6 +56,7 @@ export const requestPromoItems = () => {
   return async (dispatch) => {
     let response = await HomeApi.getPromoItems();
     dispatch(setPromoItems(response.data));
+    dispatch(setIsLoading());
   };
 };
 export const requestCategories = () => {
@@ -62,12 +64,14 @@ export const requestCategories = () => {
     let response = await HomeApi.getCategories();
     /* console.log(response); */
     dispatch(setCategoriesItems(response.data));
+    dispatch(setIsLoading());
   };
 };
 export const requestBlogItems = () => {
   return async (dispatch) => {
     let response = await HomeApi.getArticles();
     dispatch(setBlogItems(response.data));
+    dispatch(setIsLoading());
   };
 };
 

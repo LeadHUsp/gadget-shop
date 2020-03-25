@@ -21,7 +21,8 @@ let mapStateToProps = (state) => {
   return {
     promo_items: state.home.promo_items,
     categories_items: state.home.categories_items,
-    blog_items: state.home.blog_items
+    blog_items: state.home.blog_items,
+    isLoading: state.preloader.isLoading
   };
 };
 
