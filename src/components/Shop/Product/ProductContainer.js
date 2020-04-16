@@ -18,7 +18,7 @@ class ProductContainer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props);
+    /* console.log(this.props); */
     if (
       prevProps.match.params.page !== this.props.match.params.page ||
       prevProps.checkbox_params !== this.props.checkbox_params
@@ -31,6 +31,7 @@ class ProductContainer extends Component {
       );
     }
   }
+
   render() {
     return (
       <div className="container">
@@ -44,7 +45,10 @@ class ProductContainer extends Component {
           </div>
           <div className={`col-9 ${s.catalog}`}>
             <SortFilter {...this.props} />
-            <Product {...this.props} />
+            <Product
+              {...this.props}
+              saveProductToCart={this.saveProductToCart}
+            />
             <Pagination
               slug={this.props.match.params.slug}
               totalPages={this.props.totalPages}
@@ -63,9 +67,11 @@ let mapStateToProps = (state) => {
     isLoading: state.products.isLoading,
     sort_params: state.filterProduct.sort_params,
     checkbox_params: state.filterProduct.checkbox_params,
-    price_params: state.filterProduct.price_params
+    price_params: state.filterProduct.price_params,
   };
 };
 export default withRouter(
-  connect(mapStateToProps, { requestProductData })(ProductContainer)
+  connect(mapStateToProps, {
+    requestProductData,
+  })(ProductContainer)
 );

@@ -5,6 +5,7 @@ import HomePageContainer from "./components/HomePage/HomePageContainer";
 import ProductContainer from "./components/Shop/Product/ProductContainer";
 import SingleProductContainer from "./components/Shop/SingleProduct/SingleProductContainer";
 import "./main.scss";
+import ShopingCartContainer from "./components/ShopingCart/ShopingCartContainer";
 
 class App extends Component {
   render() {
@@ -13,13 +14,17 @@ class App extends Component {
         <Header />
         <Switch>
           <Route exact path="/" render={() => <HomePageContainer />} />
+          <Route
+            exact
+            path="/shoping_cart"
+            render={() => <ShopingCartContainer />}
+          />
           <Route exact path="/:slug" render={() => <ProductContainer />} />
           <Route
             exact
             path="/:slug/page_:page"
             render={() => <ProductContainer />}
           />
-
           <Route
             exact
             path="/:slug/single_product/:id"
@@ -30,11 +35,6 @@ class App extends Component {
             path="/:slug/page_:page/single_product/:id"
             render={() => <SingleProductContainer />}
           />
-          {/*   <Route
-            exact
-            path="/single_product/:id"
-            render={() => <SingleProductContainer />}
-          /> */}
         </Switch>
       </Router>
     );

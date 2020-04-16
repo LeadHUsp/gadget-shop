@@ -1,0 +1,26 @@
+.delete_btn {
+    margin: 10px auto;
+    display: inline-flex;
+    padding: 5px;
+    color: #fff;
+    background: #f6731c;
+    border: none;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 1px;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    overflow: hidden;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 300ms;
+
+    &:hover {
+        background: darken(#f6731c, 10%);
+        /*  animation-duration: 1s;
+          animation-name: shake;
+          animation-iteration-count: 1; */
+    }
+}

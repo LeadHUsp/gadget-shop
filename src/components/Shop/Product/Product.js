@@ -2,11 +2,11 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import s from "./Product.module.scss";
 import { Circle } from "react-preloaders";
+import AddToCartButton from "../AddToCartButton/AddToCartButton";
 
 const Product = (props) => {
-  /*   console.log(href); */
+  /* console.log(props); */
 
-  console.log(props);
   return (
     <div className="row mx-0 justify-content-around py-4">
       {props.products_data.map((item) => (
@@ -36,10 +36,11 @@ const Product = (props) => {
               <li>Влагозащита: {item.protect}</li>
             </ul>
           </div>
-          <button className={s.product_button}>
-            Купить
-            <i className="fas fa-shopping-cart"></i>
-          </button>
+          <AddToCartButton
+            text={"Купить"}
+            id={item.id}
+            slug={props.match.params.slug}
+          />
         </div>
       ))}
       <Circle customLoading={props.isLoading} color="#f6731c" />

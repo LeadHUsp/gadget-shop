@@ -1,0 +1,24 @@
+.order_form {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 1.5rem;
+
+  label {
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+  input {
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+  .item_group {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+}
+h4 {
+  text-align: center;
+}

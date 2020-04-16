@@ -10,7 +10,7 @@ let initialState = {
   single_product_data: [],
   totalPages: 0,
   perPage: 3,
-  isLoading: true
+  isLoading: true,
 };
 
 const productReducer = (state = initialState, action) => {
@@ -18,22 +18,22 @@ const productReducer = (state = initialState, action) => {
     case SET_PRODUCT_DATA:
       return {
         ...state,
-        products_data: action.data
+        products_data: action.data,
       };
     case SET_SINGLE_PRODUCT_DATA:
       return {
         ...state,
-        single_product_data: action.data
+        single_product_data: action.data,
       };
     case SET_TOTAL_PAGES:
       return {
         ...state,
-        totalPages: action.totalPages
+        totalPages: action.totalPages,
       };
     case SET_IS_LOADING:
       return {
         ...state,
-        isLoading: false
+        isLoading: false,
       };
     default:
       return state;
@@ -43,24 +43,24 @@ const productReducer = (state = initialState, action) => {
 export const setProductData = (data) => {
   return {
     type: SET_PRODUCT_DATA,
-    data
+    data,
   };
 };
 export const setTotalPages = (totalPages) => {
   return {
     type: SET_TOTAL_PAGES,
-    totalPages
+    totalPages,
   };
 };
 export const setSingleProductData = (data) => {
   return {
     type: SET_SINGLE_PRODUCT_DATA,
-    data
+    data,
   };
 };
 export const setIsLoading = () => {
   return {
-    type: SET_IS_LOADING
+    type: SET_IS_LOADING,
   };
 };
 
@@ -78,7 +78,7 @@ export const requestProductData = (slug, currentPage, perPage, params = "") => {
       dispatch(setTotalPages(response.headers.x_totalpages));
       dispatch(setIsLoading());
     } catch (err) {
-      console.log("something going wrong");
+      console.log(err);
     }
   };
 };
@@ -86,7 +86,7 @@ export const requestProductData = (slug, currentPage, perPage, params = "") => {
 export const requestSingleProductData = (slug, id) => {
   return async (dispatch) => {
     let response = await ProductApi.getSingleProduct(slug, id);
-    console.log(response);
+    /* console.log(response); */
     dispatch(setSingleProductData(response.data));
   };
 };

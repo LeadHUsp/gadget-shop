@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import SingleProduct from "./SingleProduct";
 class SingleProductContainer extends Component {
   componentDidMount() {
-    console.log(this.props);
+    /* console.log(this.props); */
     this.props.requestSingleProductData(
       this.props.match.params.slug,
       this.props.match.params.id

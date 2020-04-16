@@ -1,44 +1,38 @@
 import React, { useState, useEffect } from "react";
 import s from "./SingleProduct.module.scss";
 import Swiper from "react-id-swiper";
+import AddToCartButton from "../AddToCartButton/AddToCartButton";
 
 const SingleProduct = (props) => {
-  console.log(props);
+  /*  console.log(props); */
   const [images, setImages] = useState([]);
-  const [colors, setColors] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  const [isShowOptions, setShowOptions] = useState(false);
 
   const descriptionToggle = () => {
     setIsOpen(!isOpen);
   };
-  const colorsShowToggle = () => {
-    setShowOptions(!isShowOptions);
-  };
+
   useEffect(() => {
     if (props.photos) {
       setImages(props.photos.split(","));
     }
-    if (props.color) {
-      setColors(props.color.split(","));
-    }
-  }, [props.photos, props.color]);
+  }, [props.photos]);
 
   const params = {
     loop: true,
     slidesPerView: 1,
     navigation: {
       nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev"
+      prevEl: ".swiper-button-prev",
     },
     pagination: {
       el: ".swiper-pagination",
-      type: "progressbar"
+      type: "progressbar",
     },
     shouldSwiperUpdate: true,
     rebuildOnUpdate: true,
     containerClass: `swiper-container`,
-    slideClass: `${s.slide}`
+    slideClass: `${s.slide}`,
   };
   return (
     <div className={`container ${s.catalog}`}>
@@ -64,6 +58,7 @@ const SingleProduct = (props) => {
               <ul>
                 <li>Бренд: {props.brand}</li>
                 <li>Серия: {props.series} </li>
+                <li>Цвет: {props.color}</li>
                 <li>Материал корпуса: {props.case_material}</li>
                 <li>Влагозащита: {props.protect}</li>
                 <li>
@@ -80,7 +75,7 @@ const SingleProduct = (props) => {
             </div>
             <div className={s.price_block}>
               <div className="px-0">цена: {props.price} грн</div>
-              <div className={s.select_options}>
+              {/* <div className={s.select_options}>
                 <div onClick={colorsShowToggle}>
                   Доступные модификации
                   <button>
@@ -100,10 +95,8 @@ const SingleProduct = (props) => {
                     );
                   })}
                 </div>
-              </div>
-              <button className={s.add_to_cart}>
-                <i class="fas fa-shopping-cart"></i> Добавить в корзину
-              </button>
+              </div> */}
+              <AddToCartButton text={"Добавить в корзину"} />
             </div>
           </div>
         </div>

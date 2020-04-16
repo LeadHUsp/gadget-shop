@@ -1,7 +1,9 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import NavContainer from "../Navigation/NavContainer";
-
-const Header = () => {
+import { connect } from "react-redux";
+import s from "./Header.module.scss";
+const Header = (props) => {
   return (
     <header className="container-fluid d-flex py-3">
       <div className="col-7">
@@ -12,9 +14,19 @@ const Header = () => {
         <i className="fas fa-search"></i>
       </div>
       <div className="col-2 d-flex justify-content-center align-items-center">
-        <span>LOGIN</span>
+        <NavLink exact to="/shoping_cart">
+          <div className={s.index}>
+            <i className="fas fa-shopping-bag"></i>Корзина
+            <span>{props.products_in_cart.length}</span>
+          </div>
+        </NavLink>
       </div>
     </header>
   );
 };
-export default Header;
+let mapStateToProps = (state) => {
+  return {
+    products_in_cart: state.shopingCart.products_in_cart,
+  };
+};
+export default connect(mapStateToProps, {})(Header);

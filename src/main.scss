@@ -78,7 +78,11 @@ input {
     transition: all 0.4s;
     text-decoration: none;
 
+    &:focus {
+        outline: none;
+    }
 }
+
 
 button,
 a:focus {
