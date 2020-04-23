@@ -1,13 +1,13 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:1337/"
+  baseURL: "https://pacific-depths-36780.herokuapp.com/",
 });
 
 export const NavigationApi = {
   getNavLinks() {
     return instance.get(`navigations`);
-  }
+  },
 };
 export const HomeApi = {
   getPromoItems() {
@@ -18,7 +18,7 @@ export const HomeApi = {
   },
   getArticles() {
     return instance.get("articles");
-  }
+  },
 };
 export const ProductApi = {
   getProducts(slug, currentPage = 1, perPage = 3, params) {
@@ -34,5 +34,5 @@ export const ProductApi = {
   },
   getSingleProduct(slug, id) {
     return instance.get(`/${slug}/${id}`);
-  }
+  },
 };
