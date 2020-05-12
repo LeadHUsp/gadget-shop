@@ -4,18 +4,48 @@ import s from "./Nav.module.scss";
 
 const Nav = (props) => {
   return (
-    <nav className={s.nav}>
-      <NavLink className={s.nav_brand} to={"/home"}>
-        NAVBRAND
-      </NavLink>
-      <ul className={s.nav_wrapper}>
-        {props.nav_links.map((link) => (
-          <li className={s.nav_link} key={link.id}>
-            <NavLink to={`${link.link}`}>{link.title}</NavLink>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <header className="container-fluid d-flex ">
+      <nav className={s.nav_bar}>
+        <button className={s.menu_toggle} onClick={props.menuToggle}>
+          <i className="fas fa-bars"></i>
+        </button>
+        <ul className={`${s.nav_items_wrapper} ${props.isOpen && s.show_nav}`}>
+          <button
+            className={`${s.menu_toggle} ${s.menu_close}`}
+            onClick={props.menuToggle}
+          >
+            <i class="fas fa-times"></i>
+          </button>
+          <NavLink className={s.nav_brand} to={"/"} onClick={props.menuToggle}>
+            gadget shop
+          </NavLink>
+          {props.nav_links.map((link) => (
+            <li className={s.nav_link} key={link.id}>
+              <NavLink to={`${link.link}`} onClick={props.menuToggle}>
+                {link.title}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+        <div className={`${s.search_box} `}>
+          <div>
+            <input type="text" placeholder="Поиск" />
+            <i className="fas fa-search"></i>
+          </div>
+        </div>
+        <div className={`${s.cart}`}>
+          <NavLink exact to="/shoping_cart">
+            <div className={s.index}>
+              <i className="fas fa-shopping-bag"></i>
+              <span className={s.cart_text}>Корзина</span>
+              <span className={s.product_count}>
+                {props.products_in_cart.length}
+              </span>
+            </div>
+          </NavLink>
+        </div>
+      </nav>
+    </header>
   );
 };
 export default Nav;

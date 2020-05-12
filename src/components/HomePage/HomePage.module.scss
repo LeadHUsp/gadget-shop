@@ -64,7 +64,7 @@ $black: #282936;
   height: auto;
 }
 
-.card {
+.categories_card {
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -193,5 +193,28 @@ $black: #282936;
     line-height: 1.6;
     text-align: center;
     text-transform: uppercase;
+  }
+}
+
+@media (min-width: 0) and (max-width: 640px) {
+  .slide_image {
+    width: 100%;
+  }
+
+  .slide_description {
+    width: 100%;
+    text-align: justify;
+  }
+
+  .slide {
+    flex-direction: column;
+  }
+
+  .learn_more {
+    width: 90%;
+  }
+
+  .categories_card {
+    margin: 5px 10px;
   }
 }

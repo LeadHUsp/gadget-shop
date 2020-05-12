@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import OrderForm from "./OrderForm";
-
 import { calculateOrderAmount } from "../../../redux/shopingCartReducer";
 
 let OrderFormContainer = (props) => {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Header from "./components/Header/Header";
+import NavContainer from "./components/Navigation/NavContainer";
 import HomePageContainer from "./components/HomePage/HomePageContainer";
 import ProductContainer from "./components/Shop/Product/ProductContainer";
 import SingleProductContainer from "./components/Shop/SingleProduct/SingleProductContainer";
@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Header />
+        <NavContainer />
         <Switch>
           <Route exact path="/" render={() => <HomePageContainer />} />
           <Route

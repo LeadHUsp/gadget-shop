@@ -1,8 +1,8 @@
 import React from "react";
-import style from "./FormControls.module.scss";
+import s from "./FormControls.module.scss";
 import { Field } from "redux-form";
 
-export const Input = ({ input, meta, ...props }) => {
+/* export const Input = ({ input, meta, ...props }) => {
   const hasError = meta.touched && meta.error;
   return (
     <div className={`${style.form_control} ${hasError && style.error}`}>
@@ -11,7 +11,7 @@ export const Input = ({ input, meta, ...props }) => {
       {hasError && <span className={style.error_message}>{meta.error}</span>}
     </div>
   );
-};
+}; */
 
 export const createFields = (
   placeholder,
@@ -22,7 +22,7 @@ export const createFields = (
   text = ""
 ) => {
   return (
-    <div>
+    <>
       <Field
         placeholder={placeholder}
         name={name}
@@ -31,6 +31,6 @@ export const createFields = (
         {...props}
       />
       {text}
-    </div>
+    </>
   );
 };

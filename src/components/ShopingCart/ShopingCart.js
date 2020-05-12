@@ -11,7 +11,7 @@ const ShopingCart = (props) => {
     <div className={`${s.catalog} container`}>
       {props.items.length > 0 ? (
         <div className="row">
-          <div className="col-9">
+          <div className="col-8">
             <div className={`${s.head} row pb-4`}>
               <div className="col-3 offset-2">Продукт</div>
               <div className="col-2">Цена</div>
@@ -55,7 +55,7 @@ const ShopingCart = (props) => {
               );
             })}
           </div>
-          <div className="col-3">
+          <div className="col-4">
             <OrderFormContainer />
           </div>
         </div>

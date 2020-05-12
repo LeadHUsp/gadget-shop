@@ -11,15 +11,15 @@ const HomePage = (props) => {
     slidesPerView: 1,
     navigation: {
       nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev"
+      prevEl: ".swiper-button-prev",
     },
     pagination: {
       el: ".swiper-pagination",
-      clickable: true
+      clickable: true,
     },
     shouldSwiperUpdate: true,
     rebuildOnUpdate: true,
-    containerClass: `swiper-container ${s.swiper_wrapper}`
+    containerClass: `swiper-container ${s.swiper_wrapper}`,
   };
   return (
     <>
@@ -32,7 +32,7 @@ const HomePage = (props) => {
                   <div
                     className={s.slide_image}
                     style={{
-                      backgroundImage: `url(${item.image})`
+                      backgroundImage: `url(${item.image})`,
                     }}
                   ></div>
                   <div className={s.slide_description}>
@@ -42,7 +42,7 @@ const HomePage = (props) => {
                         <span className={s.circle} aria-hidden="true">
                           <span className={`${s.icon} ${s.arrow}`}></span>
                         </span>
-                        <span className={s.button_text}>К покупкам</span>
+                        <span className={s.button_text}>перейти к акции</span>
                       </NavLink>
                     </div>
                   </div>
@@ -57,10 +57,10 @@ const HomePage = (props) => {
           </div>
           {props.categories_items.map((item) => (
             <div
-              className={`col-xs-12 col-lg-6 ${s.card}`}
+              className={`col-xs-12 col-lg-6 ${s.categories_card}`}
               key={item.id}
               style={{
-                backgroundImage: `url(${item.main_image})`
+                backgroundImage: `url(${item.main_image})`,
               }}
             >
               <div className={s.card_front}>
@@ -88,7 +88,7 @@ const HomePage = (props) => {
               <div className={s.description}>
                 <h4 className="pb-3">{item.title}</h4>
                 <span className="small-txt">
-                  By {item.author} on {dateTranslater(item.updatedat)}
+                  By {item.author} on {dateTranslater(item.updatedAt)}
                 </span>
                 <p className="pt-4">{item.annotation} </p>
               </div>

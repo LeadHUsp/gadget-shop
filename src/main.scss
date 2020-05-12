@@ -1,30 +1,31 @@
 $grid-breakpoints: (xs: 0,
-    sm: 576px,
-    md: 768px,
-    lg: 992px,
-    xl: 1200px,
-    xxl: 1600px) !default;
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1600px,
+);
 
 $container-max-widths: (sm: 540px,
-    md: 720px,
-    lg: 960px,
-    xl: 1140px,
-    xxl: 1440px) !default;
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1440px,
+);
 
-//Swiper 
+//Swiper
 $themeColor: #f6731c;
-
 
 .swiper-pagination-progressbar {
 
-    .swiper-container-horizontal>&,
-    .swiper-container-vertical>&.swiper-pagination-progressbar-opposite {
-        width: 100%;
-        height: 4px;
-        left: 0;
-        top: unset !important;
-        bottom: 0
-    }
+  .swiper-container-horizontal>&,
+  .swiper-container-vertical>&.swiper-pagination-progressbar-opposite {
+    width: 100%;
+    height: 4px;
+    left: 0;
+    top: unset !important;
+    bottom: 0;
+  }
 }
 
 @import "../node_modules/bootstrap/scss/bootstrap-grid.scss";
@@ -34,64 +35,63 @@ $themeColor: #f6731c;
 @import "../node_modules/swiper/components/pagination/pagination.scss";
 
 @font-face {
-    font-family: Montserrat-Regular;
-    src: url('./assets/fonts/Montserrat-Regular.ttf');
+  font-family: Montserrat-Regular;
+  src: url("./assets/fonts/Montserrat-Regular.ttf");
 }
 
 @font-face {
-    font-family: Montserrat-Medium;
-    src: url('./assets/fonts/Montserrat-Medium.ttf');
+  font-family: Montserrat-Medium;
+  src: url("./assets/fonts/Montserrat-Medium.ttf");
 }
 
 @font-face {
-    font-family: Montserrat-Bold;
-    src: url('./assets/fonts/Montserrat-Bold.ttf');
+  font-family: Montserrat-Bold;
+  src: url("./assets/fonts/Montserrat-Bold.ttf");
 }
-
 
 * {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
 body,
 html {
-    height: 100%;
-    font-family: Montserrat-Regular, sans-serif;
-    font-weight: 400;
+  height: 100%;
+  font-family: Montserrat-Regular, sans-serif;
+  font-weight: 400;
 }
 
 body {
-    background-color: #fafafa;
+  background-color: #fafafa;
 }
 
 a,
 button,
 input {
-    font-family: Montserrat-Regular;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.7;
-    color: #666666;
-    margin: 0px;
-    transition: all 0.4s;
-    text-decoration: none;
+  font-family: Montserrat-Regular;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #666666;
+  margin: 0px;
+  transition: all 0.4s;
+  text-decoration: none;
+  border: none;
 
-    &:focus {
-        outline: none;
-    }
+  &:focus {
+    outline: none;
+  }
 }
-
 
 button,
 a:focus {
-    outline: none !important;
+  outline: none !important;
 }
 
 a:hover {
-    text-decoration: none;
-    color: #e65540;
+  text-decoration: none;
+  color: #e65540;
 }
 
 h1,
@@ -100,32 +100,32 @@ h3,
 h4,
 h5,
 h6 {
-    margin: 0px;
-    font-weight: 700;
+  margin: 0px;
+  font-weight: 700;
 }
 
 p {
-    font-family: Montserrat-Regular;
-    font-size: 15px;
-    line-height: 1.7;
-    color: #888888;
-    margin: 0px;
+  font-family: Montserrat-Regular;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #888888;
+  margin: 0px;
 }
 
 ul,
 li {
-    margin: 0px;
-    list-style-type: none;
+  margin: 0px;
+  list-style-type: none;
 }
 
 .small-txt {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .text-center {
-    text-align: center;
+  text-align: center;
 }
 
 .relative {
-    position: relative;
+  position: relative;
 }

@@ -1,19 +1,164 @@
-.nav_link {
-    display: block;
-    padding: 0 15px;
-}
-
-.nav_wrapper {
-    display: flex;
+.nav_bar {
+  width: 100%;
+  display: flex;
+  padding: 15px 0;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: relative;
 }
 
 .nav_brand {
-    display: block;
-    padding: 0 15px;
+  display: block;
+  padding: 0 15px;
+  text-transform: uppercase;
+}
+
+.menu_toggle {
+  display: none;
+  background: none;
+  font-size: 35px;
+  width: 45px;
+  height: 45px;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu_close {
+  color: #ffffff;
+
+  margin: 25px 0;
 
 }
 
-.nav {
+.nav_items_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 60%;
+  max-width: 60%;
+}
+
+.nav_link {
+  display: block;
+  padding: 0 15px;
+}
+
+
+
+.search_box {
+  flex: 0 0 30%;
+  max-width: 30%;
+  padding-left: 10px;
+
+  div {
+    width: 75%;
+    position: relative;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  i {
+    position: absolute;
+    right: 0;
+
+  }
+}
+
+.cart {
+  flex: 0 0 10%;
+  max-width: 10%;
+}
+
+
+.index {
+  position: relative;
+
+  i {
+    font-size: 24px;
+  }
+
+  .product_count {
+    position: absolute;
+    color: #ffffff;
+    left: -10px;
+    top: -10px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background: #e65540;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.show_nav {
+  display: flex !important;
+}
+
+@media (min-width: 0) and (max-width: 1199px) {
+  .nav_bar {
+    justify-content: space-evenly;
+  }
+
+  .menu_toggle {
+    display: flex;
+  }
+
+
+  .nav_items_wrapper {
+    width: 100%;
+    max-width: 100%;
+    position: fixed;
+    display: none;
+    background: rgb(121, 120, 120);
+    flex-direction: column;
+    justify-content: flex-start;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    height: 100%;
+  }
+
+  .nav_brand {
+    color: #ffffff;
+    padding-bottom: 15px;
+  }
+
+  .nav_link {
+    padding: 5px 15px;
+
+    a {
+      color: #ffffff;
+    }
+
+  }
+
+  .search_box {
+    flex: 0 0 70%;
+    max-width: 70%;
+
+    div {
+      width: 100%;
+    }
+
+  }
+
+  .cart {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+    flex: 0 0 15%;
+    max-width: 15%;
+  }
+
+  .cart_text {
+    display: none;
+  }
 }

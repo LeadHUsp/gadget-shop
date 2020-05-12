@@ -4,6 +4,21 @@ import { connect } from "react-redux";
 import Nav from "./Nav";
 
 class NavContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: false,
+    };
+  }
+  menuToggle() {
+    /*  this.setState((prevState) => {
+      return {
+        isOpen: !prevState.isOpen,
+      };
+    }); */
+    this.setState({ isOpen: !this.state.isOpen });
+    console.log(this.state);
+  }
   componentDidMount() {
     this.props.requestLinks();
   }
@@ -11,7 +26,12 @@ class NavContainer extends Component {
   render() {
     return (
       <>
-        <Nav nav_links={this.props.nav_links} />
+        <Nav
+          products_in_cart={this.props.products_in_cart}
+          isOpen={this.state.isOpen}
+          nav_links={this.props.nav_links}
+          menuToggle={this.menuToggle.bind(this)}
+        />
       </>
     );
   }
@@ -19,7 +39,8 @@ class NavContainer extends Component {
 
 let mapStateToProps = (state) => {
   return {
-    nav_links: state.navigation.nav_links
+    nav_links: state.navigation.nav_links,
+    products_in_cart: state.shopingCart.products_in_cart,
   };
 };
 
