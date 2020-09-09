@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://pacific-depths-36780.herokuapp.com/",
+  baseURL: "https://pacific-depths-36780.herokuapp.com",
   headers: {
     "Content-Type": "application/json",
   },
