@@ -196,7 +196,7 @@ $black: #282936;
   }
 }
 
-@media (min-width: 0) and (max-width: 640px) {
+@media (min-width: 0) and (max-width: 576px) {
   .slide_image {
     width: 100%;
   }
@@ -216,5 +216,12 @@ $black: #282936;
 
   .categories_card {
     margin: 5px 10px;
+    min-height: 200px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .categories_card {
+    min-height: 400px;
   }
 }

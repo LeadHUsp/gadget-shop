@@ -23,9 +23,9 @@ const HomePage = (props) => {
   };
   return (
     <>
-      <div className="container">
-        <div className="row">
-          <div className="col-12 px-0">
+      <div className='container'>
+        <div className='row'>
+          <div className='col-12 px-0'>
             <Swiper {...params}>
               {props.promo_items.map((item) => (
                 <div key={item.id} className={s.slide}>
@@ -33,13 +33,12 @@ const HomePage = (props) => {
                     className={s.slide_image}
                     style={{
                       backgroundImage: `url(${item.image})`,
-                    }}
-                  ></div>
+                    }}></div>
                   <div className={s.slide_description}>
-                    <div className="col-12"> {item.promo_description} </div>
-                    <div className="col-12 d-flex justify-content-center">
+                    <div className='col-12'> {item.promo_description} </div>
+                    <div className='col-12 d-flex justify-content-center'>
                       <NavLink to={item.link} className={s.learn_more}>
-                        <span className={s.circle} aria-hidden="true">
+                        <span className={s.circle} aria-hidden='true'>
                           <span className={`${s.icon} ${s.arrow}`}></span>
                         </span>
                         <span className={s.button_text}>перейти к акции</span>
@@ -51,8 +50,8 @@ const HomePage = (props) => {
             </Swiper>
           </div>
         </div>
-        <div className="row pt-4">
-          <div className="col-12">
+        <div className='row pt-4'>
+          <div className='col-12'>
             <h2 className={s.title}>Наши товары</h2>
           </div>
           {props.categories_items.map((item) => (
@@ -61,41 +60,38 @@ const HomePage = (props) => {
               key={item.id}
               style={{
                 backgroundImage: `url(${item.main_image})`,
-              }}
-            >
+              }}>
               <div className={s.card_front}>
                 <NavLink to={`/${item.slug}`} className={s.learn_more}>
-                  <span className={s.circle} aria-hidden="true">
+                  <span className={s.circle} aria-hidden='true'>
                     <span className={`${s.icon} ${s.arrow}`}></span>
                   </span>
-                  <span className={s.button_text}>
-                    Перейти в раздел {item.name}
-                  </span>
+                  <span className={s.button_text}>Перейти в раздел {item.name}</span>
                 </NavLink>
               </div>
             </div>
           ))}
         </div>
-        <div className="row">
-          <div className="col-12">
+        <div className='row'>
+          <div className='col-12'>
             <h2 className={s.title}>Наши статьи</h2>
           </div>
           {props.blog_items.map((item) => (
-            <div className="col-xs-12 col-lg-4" key={item.id}>
+            <div className='col-xs-12 col-lg-4' key={item.id}>
               <NavLink to={`blog/${item.id}`} className={s.blog_link}>
-                <img src={`${item.image}`} alt="article" className={s.img} />
+                <img src={`${item.image}`} alt='article' className={s.img} />
               </NavLink>
               <div className={s.description}>
-                <h4 className="pb-3">{item.title}</h4>
-                <span className="small-txt">
+                <h4 className='pb-3'>{item.title}</h4>
+                <span className='small-txt'>
                   By {item.author} on {dateTranslater(item.updatedAt)}
                 </span>
-                <p className="pt-4">{item.annotation} </p>
+                <p className='pt-4'>{item.annotation} </p>
               </div>
             </div>
           ))}
         </div>
-        <Circle customLoading={props.isLoading} color="#f6731c" />
+        <Circle customLoading={props.isLoading} color='#f6731c' time={0} />
       </div>
     </>
   );

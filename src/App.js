@@ -8,31 +8,29 @@ import "./main.scss";
 import ShopingCartContainer from "./components/ShopingCart/ShopingCartContainer";
 
 class App extends Component {
+  componentDidMount() {
+    if (process.env.NODE_ENV === "production") {
+      console.log(process.env.NODE_ENV);
+    }
+  }
+
   render() {
     return (
       <Router>
         <NavContainer />
         <Switch>
-          <Route exact path="/" render={() => <HomePageContainer />} />
+          <Route exact path='/' render={() => <HomePageContainer />} />
+          <Route exact path='/shoping_cart' render={() => <ShopingCartContainer />} />
+          <Route exact path='/:slug' render={() => <ProductContainer />} />
+          <Route exact path='/:slug/page_:page' render={() => <ProductContainer />} />
           <Route
             exact
-            path="/shoping_cart"
-            render={() => <ShopingCartContainer />}
-          />
-          <Route exact path="/:slug" render={() => <ProductContainer />} />
-          <Route
-            exact
-            path="/:slug/page_:page"
-            render={() => <ProductContainer />}
-          />
-          <Route
-            exact
-            path="/:slug/single_product/:id"
+            path='/:slug/single_product/:id'
             render={() => <SingleProductContainer />}
           />
           <Route
             exact
-            path="/:slug/page_:page/single_product/:id"
+            path='/:slug/page_:page/single_product/:id'
             render={() => <SingleProductContainer />}
           />
         </Switch>

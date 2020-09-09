@@ -14,7 +14,7 @@ const Nav = (props) => {
             className={`${s.menu_toggle} ${s.menu_close}`}
             onClick={props.menuToggle}
           >
-            <i class="fas fa-times"></i>
+            <i className="fas fa-times"></i>
           </button>
           <NavLink className={s.nav_brand} to={"/"} onClick={props.menuToggle}>
             gadget shop

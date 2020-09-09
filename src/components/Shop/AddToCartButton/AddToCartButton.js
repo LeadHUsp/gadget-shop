@@ -10,6 +10,8 @@ const AddToCartButton = (props) => {
       product = {
         slug: props.slug,
         id: props.id,
+        price: Number(props.price),
+        name: props.title,
         count: 1,
       };
     if (props.products_in_cart.length) {
@@ -28,7 +30,7 @@ const AddToCartButton = (props) => {
   };
   return (
     <button className={s.product_button} onClick={saveProductToCart}>
-      <i className="fas fa-shopping-cart"></i>
+      <i className='fas fa-shopping-cart'></i>
       {props.text}
     </button>
   );

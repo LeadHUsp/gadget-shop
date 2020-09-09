@@ -6,6 +6,7 @@ import productReducer from "./productReducer";
 import filterProductReducer from "./filterProductReducer";
 import preloaderReducer from "./preloaderReducer";
 import shopingCartReducer from "./shopingCartReducer";
+import { composeWithDevTools } from "redux-devtools-extension";
 import { reducer as formReducer } from "redux-form";
 
 let reducers = combineReducers({
@@ -18,6 +19,6 @@ let reducers = combineReducers({
   form: formReducer,
 });
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+let store = createStore(reducers, composeWithDevTools(applyMiddleware(thunkMiddleware)));
 
 export default store;

@@ -1,11 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import OrderForm from "./OrderForm";
-import { calculateOrderAmount } from "../../../redux/shopingCartReducer";
+import { calculateOrderAmount, postOrder } from "../../../redux/shopingCartReducer";
 
 let OrderFormContainer = (props) => {
   const onSubmit = (formData) => {
+    formData.products = props.products_in_cart;
     console.log(formData);
+    props.postOrder(formData);
   };
   return (
     <>
@@ -16,8 +18,9 @@ let OrderFormContainer = (props) => {
 
 const mapStateToProps = (state) => ({
   order_amount: state.shopingCart.order_amount,
+  products_in_cart: state.shopingCart.products_in_cart,
 });
 
-export default connect(mapStateToProps, { calculateOrderAmount })(
+export default connect(mapStateToProps, { calculateOrderAmount, postOrder })(
   OrderFormContainer
 );

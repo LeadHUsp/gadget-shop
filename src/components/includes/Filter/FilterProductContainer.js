@@ -3,7 +3,7 @@ import s from "./Filter.module.scss";
 import {
   requestFilterItems,
   setPriceParams,
-  setCheckBoxParams
+  setCheckBoxParams,
 } from "../../../redux/filterProductReducer";
 import { requestProductData } from "../../../redux/productReducer";
 import FilterProduct from "./FilterProduct";
@@ -30,7 +30,7 @@ class FilterProductContainer extends Component {
       params.push(`${param_name}=${param_value}`);
       params = params.join("&");
     }
-    console.log(params);
+    /*  console.log(params); */
     this.props.history.push(`/${this.props.slug}/`);
     this.props.setCheckBoxParams(params);
     /* this.props.requestProductData(
@@ -74,7 +74,7 @@ let mapStateToProps = (state) => {
     filter_items: state.filterProduct.filter_items,
     checkbox_params: state.filterProduct.checkbox_params,
     price_params: state.filterProduct.price_params,
-    sort_params: state.filterProduct.sort_params
+    sort_params: state.filterProduct.sort_params,
   };
 };
 
@@ -82,5 +82,5 @@ export default connect(mapStateToProps, {
   requestFilterItems,
   requestProductData,
   setCheckBoxParams,
-  setPriceParams
+  setPriceParams,
 })(FilterProductContainer);

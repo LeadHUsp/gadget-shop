@@ -17,7 +17,7 @@ class NavContainer extends Component {
       };
     }); */
     this.setState({ isOpen: !this.state.isOpen });
-    console.log(this.state);
+    /*    console.log(this.state); */
   }
   componentDidMount() {
     this.props.requestLinks();

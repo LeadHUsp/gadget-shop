@@ -2,16 +2,15 @@ import React from "react";
 import s from "./FormControls.module.scss";
 import { Field } from "redux-form";
 
-/* export const Input = ({ input, meta, ...props }) => {
-  const hasError = meta.touched && meta.error;
+export const Input = ({ input, meta, ...props }) => {
+  const showError = meta.touched && meta.error;
   return (
-    <div className={`${style.form_control} ${hasError && style.error}`}>
-      <input {...input} {...props} />
-
-      {hasError && <span className={style.error_message}>{meta.error}</span>}
-    </div>
+    <>
+      <input className={showError ? s.form_error : ""} {...props} {...input} />
+      {showError && <div className={s.error_message}>{meta.error}</div>}
+    </>
   );
-}; */
+};
 
 export const createFields = (
   placeholder,

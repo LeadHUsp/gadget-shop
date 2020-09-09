@@ -1,11 +1,20 @@
 export const required = (value) => {
   if (value) return undefined;
-  return "Field is required";
+  return "Поле не заполнено";
 };
-
+export const email = (value) => {
+  return value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+    ? "Не правильно указана email"
+    : undefined;
+};
+export const phoneNumber = (value) => {
+  return value && !/^\+[0-9]{12}/.test(value)
+    ? "Неверно указан номер телефона"
+    : undefined;
+};
 export const maxLength = (maxLength) => (value) => {
   if (value && value.length > maxLength)
-    return `Max lenght is ${maxLength} symbols`;
+    return `Максимальное кол-во знаков ${maxLength}`;
   return undefined;
 };
 

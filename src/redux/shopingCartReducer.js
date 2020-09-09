@@ -9,9 +9,9 @@ const DECREASE_PRODUCT_COUNT = "shopingCart/DECREASE_PRODUCT_COUNT";
 const CALCULATE_ORDER_AMOUNT = "shopingCart/CALCULATE_ORDER_AMOUNT";
 let initialState = {
   products_in_cart: [
-    { id: "5e71d1395f168d1fb4cb3b85", slug: "smartphones", count: 1 },
+    /* { id: "5e71d1395f168d1fb4cb3b85", slug: "smartphones", count: 1 },
     { id: "5e7366091c9d4400007f23f3", slug: "smartphones", count: 1 },
-    { id: "5e73c61d1c9d44000066968d", slug: "smartphones", count: 1 },
+    { id: "5e73c61d1c9d44000066968d", slug: "smartphones", count: 1 }, */
   ],
   products_in_cart_data: [],
   order_amount: 0,
@@ -37,9 +37,7 @@ const shopingCartReducer = (state = initialState, action) => {
     case DELETE_PRODUCT:
       return {
         ...state,
-        products_in_cart: state.products_in_cart.filter(
-          (prod) => prod.id !== action.id
-        ),
+        products_in_cart: state.products_in_cart.filter((prod) => prod.id !== action.id),
         products_in_cart_data: state.products_in_cart_data.filter(
           (prod) => prod.id !== action.id
         ),
@@ -134,6 +132,12 @@ export const requestSingleProductData = (slug, id, count = 1) => {
     response.data.count = count;
     response.data.slug = slug;
     dispatch(setSingleProductData(response.data));
+  };
+};
+export const postOrder = (orderData) => {
+  return async (dispatch) => {
+    let response = await ProductApi.postOrderData(orderData);
+    console.log(response.status);
   };
 };
 
