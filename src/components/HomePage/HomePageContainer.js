@@ -4,14 +4,16 @@ import { connect } from "react-redux";
 import {
   requestPromoItems,
   requestCategories,
-  requestBlogItems
+  requestBlogItems,
 } from "../../redux/homeReducer";
+import { setIsLoading } from "../../redux/preloaderReducer";
 
 class HomePageContainer extends Component {
   componentDidMount() {
     this.props.requestPromoItems();
     this.props.requestCategories();
     this.props.requestBlogItems();
+    this.props.setIsLoading();
   }
   render() {
     return <HomePage {...this.props} />;
@@ -22,12 +24,13 @@ let mapStateToProps = (state) => {
     promo_items: state.home.promo_items,
     categories_items: state.home.categories_items,
     blog_items: state.home.blog_items,
-    isLoading: state.preloader.isLoading
+    isLoading: state.preloader.isLoading,
   };
 };
 
 export default connect(mapStateToProps, {
   requestPromoItems,
   requestCategories,
-  requestBlogItems
+  requestBlogItems,
+  setIsLoading,
 })(HomePageContainer);

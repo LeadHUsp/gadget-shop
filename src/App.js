@@ -1,11 +1,14 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavContainer from "./components/Navigation/NavContainer";
 import HomePageContainer from "./components/HomePage/HomePageContainer";
-import ProductContainer from "./components/Shop/Product/ProductContainer";
 import SingleProductContainer from "./components/Shop/SingleProduct/SingleProductContainer";
 import "./main.scss";
 import ShopingCartContainer from "./components/ShopingCart/ShopingCartContainer";
+import { Circle } from "react-preloaders";
+const ProductContainer = React.lazy(() =>
+  import("./components/Shop/Product/ProductContainer")
+);
 
 class App extends Component {
   componentDidMount() {
@@ -21,7 +24,17 @@ class App extends Component {
         <Switch>
           <Route exact path='/' render={() => <HomePageContainer />} />
           <Route exact path='/shoping_cart' render={() => <ShopingCartContainer />} />
-          <Route exact path='/:slug' render={() => <ProductContainer />} />
+          <Route
+            exact
+            path='/:slug'
+            render={() => {
+              return (
+                <Suspense fallback={<Circle color='#f6731c' />}>
+                  <ProductContainer />
+                </Suspense>
+              );
+            }}
+          />
           <Route exact path='/:slug/page_:page' render={() => <ProductContainer />} />
           <Route
             exact

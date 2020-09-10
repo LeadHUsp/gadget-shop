@@ -3,7 +3,6 @@ import s from "./HomePage.module.scss";
 import Swiper from "react-id-swiper";
 import { NavLink } from "react-router-dom";
 import { dateTranslater } from "../utils/date";
-import { Circle } from "react-preloaders";
 
 const HomePage = (props) => {
   const params = {
@@ -91,7 +90,6 @@ const HomePage = (props) => {
             </div>
           ))}
         </div>
-        <Circle customLoading={props.isLoading} color='#f6731c' time={0} />
       </div>
     </>
   );
