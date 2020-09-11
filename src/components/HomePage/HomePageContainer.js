@@ -13,7 +13,6 @@ class HomePageContainer extends Component {
     this.props.requestPromoItems();
     this.props.requestCategories();
     this.props.requestBlogItems();
-    this.props.setIsLoading();
   }
   render() {
     return <HomePage {...this.props} />;

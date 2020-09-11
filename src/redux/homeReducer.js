@@ -8,7 +8,7 @@ const SET_BLOG_DATA = "home/SET_BLOG_DATA";
 let initialState = {
   promo_items: [],
   categories_items: [],
-  blog_items: []
+  blog_items: [],
 };
 
 const homeReducer = (state = initialState, action) => {
@@ -16,17 +16,17 @@ const homeReducer = (state = initialState, action) => {
     case SET_PROMO_DATA:
       return {
         ...state,
-        promo_items: action.items
+        promo_items: action.items,
       };
     case SET_CATEGORIES_DATA:
       return {
         ...state,
-        categories_items: action.items
+        categories_items: action.items,
       };
     case SET_BLOG_DATA:
       return {
         ...state,
-        blog_items: action.items
+        blog_items: action.items,
       };
     default:
       return state;
@@ -36,19 +36,19 @@ const homeReducer = (state = initialState, action) => {
 export const setPromoItems = (items) => {
   return {
     type: SET_PROMO_DATA,
-    items
+    items,
   };
 };
 export const setCategoriesItems = (items) => {
   return {
     type: SET_CATEGORIES_DATA,
-    items
+    items,
   };
 };
 export const setBlogItems = (items) => {
   return {
     type: SET_BLOG_DATA,
-    items
+    items,
   };
 };
 
