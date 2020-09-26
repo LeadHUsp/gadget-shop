@@ -3,17 +3,15 @@
   border-radius: 10px;
   padding: 15px;
   background: #fff;
+
 }
 
-@media screen and (min-width: 1200px) {
-  .catalog {
-    display: block;
-  }
-}
+
+
+
 
 .product_card {
-  flex: 0 0 33%;
-  max-width: 33%;
+  width: 33%;
   padding: 0 15px;
   text-align: center;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
@@ -57,5 +55,13 @@
       list-style-type: disc;
       padding: 5px 0;
     }
+  }
+}
+
+@media (max-width: 360px) {
+  .product_card {
+    width: 100%;
+    margin-top: 25px;
+    padding-top: 15px;
   }
 }

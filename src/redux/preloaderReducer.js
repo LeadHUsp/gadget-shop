@@ -1,7 +1,7 @@
-const SET_IS_LOADING = "product/SET_IS_LOADING";
+const SET_IS_LOADING = "preloader/SET_IS_LOADING";
 
 let initialState = {
-  isLoading: true
+  isLoading: true,
 };
 
 const preloaderReducer = (state = initialState, action) => {
@@ -9,7 +9,7 @@ const preloaderReducer = (state = initialState, action) => {
     case SET_IS_LOADING:
       return {
         ...state,
-        isLoading: false
+        isLoading: false,
       };
     default:
       return state;
@@ -18,7 +18,7 @@ const preloaderReducer = (state = initialState, action) => {
 
 export const setIsLoading = () => {
   return {
-    type: SET_IS_LOADING
+    type: SET_IS_LOADING,
   };
 };
 

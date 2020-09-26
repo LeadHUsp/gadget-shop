@@ -34,6 +34,6 @@ it("product data in cart should be set", () => {
   data.count = count;
   let action = setSingleProductData(data);
   let newState = shopingCartReducer(initialState, action);
-  console.log(newState.products_in_cart_data);
+  /* console.log(newState.products_in_cart_data); */
   expect(newState.products_in_cart_data.length).toBe(1);
 });

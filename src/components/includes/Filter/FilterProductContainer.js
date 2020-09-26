@@ -4,45 +4,94 @@ import {
   requestFilterItems,
   setPriceParams,
   setCheckBoxParams,
+  initAddCheckedItems,
+  deleteCheckedItem,
+  pushCheckedItem,
 } from "../../../redux/filterProductReducer";
 import { requestProductData } from "../../../redux/productReducer";
+import { withRouter } from "react-router-dom";
 import FilterProduct from "./FilterProduct";
 import { connect } from "react-redux";
 import FilterPrice from "./FilterPrice";
 
-class FilterProductContainer extends Component {
-  componentDidMount() {
-    this.props.requestFilterItems(this.props.slug);
-  }
+const queryString = require("query-string");
 
+class FilterProductContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: true,
+    };
+  }
+  componentDidMount() {
+    let parsedUrl = queryString.parse(this.props.location.search.substr(1), {
+      parseNumbers: true,
+      arrayFormat: "separator",
+      arrayFormatSeparator: "_",
+    });
+    this.props.setCheckBoxParams(parsedUrl);
+    this.props.requestFilterItems(this.props.slug);
+
+    if (window.innerWidth < 576) {
+      this.setState({ isOpen: false });
+    }
+  }
+  filterItemsShow = () => {
+    this.setState((prevState) => {
+      return { isOpen: !prevState.isOpen };
+    });
+  };
+
+  /* Логика => парсим строку урла =>  мапом проходимся по каждому элементу filter_item =>
+  на каждом шаге мапа вызываем цикл for для checkbox => при совпадении item.param и имени свойства checkbox
+  добавляем в item массив checked, где будут указаны выбранные параметры фильтра */
+  pushCheckBoxParamsToUrl = () => {
+    let stringifyUrl = queryString.stringify(this.props.checkbox_params, {
+      parseNumbers: true,
+      arrayFormat: "separator",
+      arrayFormatSeparator: "_",
+    });
+    this.props.history.push({
+      pathname: `/${this.props.slug}`,
+      search: `${stringifyUrl}`,
+    });
+  };
   onChangeParams = (e) => {
-    /*  console.log(this.props.filter_params); */
-    let params = this.props.checkbox_params.split("&");
     let param_name = e.target.name,
       param_value = e.target.value;
-    if (e.target.checked === false && e.target.type === "checkbox") {
-      let index = params.indexOf(`${param_name}=${param_value}`);
-      if (index > -1) {
-        params.splice(index, 1);
-        params = params.join("&");
-      }
-    } else {
-      params.push(`${param_name}=${param_value}`);
-      params = params.join("&");
+    /* console.log(e.target.getAttribute("typeofvalue") === "number"); */
+    if (e.target.getAttribute("typeofvalue") === "number") {
+      param_value = Number(param_value);
     }
-    /*  console.log(params); */
-    this.props.history.push(`/${this.props.slug}/`);
-    this.props.setCheckBoxParams(params);
-    /* this.props.requestProductData(
-      this.props.slug,
-      this.props.page,
-      3,
-      `${this.props.sort_params}${params}${this.props.price_params}`
-    ); */
+
+    if (e.target.checked === false && e.target.type === "checkbox") {
+      this.props.deleteCheckedItem({
+        param_name: param_name,
+        param_value: param_value,
+      });
+      this.props.initAddCheckedItems();
+    }
+    if (e.target.checked === true && e.target.type === "checkbox") {
+      /* console.log(typeof param_value); */
+      this.props.pushCheckedItem({
+        param_name: param_name,
+        param_value: param_value,
+      });
+      this.props.initAddCheckedItems();
+    }
   };
-  shouldComponentUpdate(nextProps) {
-    return nextProps.filter_items !== this.props.filter_items;
+
+  componentDidUpdate(prevProps, prevState) {
+    /* console.log(this.props.filter_items); */
+    if (prevProps.checkbox_params !== this.props.checkbox_params) {
+      /* this.onChangeParams(); */
+      this.pushCheckBoxParamsToUrl();
+    }
+    if (prevProps.match.params.slug !== this.props.match.params.slug) {
+      this.props.requestFilterItems(this.props.slug);
+    }
   }
+
   componentWillUnmount() {
     this.props.setCheckBoxParams("");
   }
@@ -50,20 +99,25 @@ class FilterProductContainer extends Component {
   render() {
     return (
       <div className={s.filter_container}>
-        <div className={s.filter_title}>
-          <i className="fas fa-filter"></i>
+        <div className={s.filter_title} onClick={this.filterItemsShow}>
+          <i className='fas fa-filter'></i>
           <span>Доступные фильтры</span>
         </div>
-        <FilterPrice {...this.props} />
-        {this.props.filter_items.map((item) => {
-          return (
-            <FilterProduct
-              key={item.param}
-              {...item}
-              onChangeParams={this.onChangeParams}
-            />
-          );
-        })}
+        {this.state.isOpen && (
+          <div>
+            <FilterPrice {...this.props} />
+            {this.props.filter_items &&
+              this.props.filter_items.map((item) => {
+                return (
+                  <FilterProduct
+                    key={item.param}
+                    {...item}
+                    onChangeParams={this.onChangeParams}
+                  />
+                );
+              })}
+          </div>
+        )}
       </div>
     );
   }
@@ -83,4 +137,7 @@ export default connect(mapStateToProps, {
   requestProductData,
   setCheckBoxParams,
   setPriceParams,
-})(FilterProductContainer);
+  initAddCheckedItems,
+  deleteCheckedItem,
+  pushCheckedItem,
+})(withRouter(FilterProductContainer));

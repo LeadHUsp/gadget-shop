@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./Pagination.module.scss";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Pagination = (props) => {
   let pages = [],
@@ -25,9 +25,9 @@ const Pagination = (props) => {
     <div className={s.pagination_container}>
       <ul>
         <li>
-          <NavLink className={`${s.page_link} `} to={`/${props.slug}/page_1`}>
-            <i className="fas fa-angle-double-left"></i>
-          </NavLink>
+          <Link className={`${s.page_link} `} to={`/${props.slug}/page_1`}>
+            <i className='fas fa-angle-double-left'></i>
+          </Link>
         </li>
         {pages.map((page) =>
           currentPage === page ? (
@@ -36,17 +36,20 @@ const Pagination = (props) => {
             </li>
           ) : (
             <li key={page}>
-              <NavLink to={`/${props.slug}/page_${page}`}>{page}</NavLink>
+              <Link
+                to={(location) => ({
+                  ...location,
+                  pathname: `/${props.slug}/page_${page}`,
+                })}>
+                {page}
+              </Link>
             </li>
           )
         )}
         <li>
-          <NavLink
-            className={`${s.page_link} `}
-            to={`/${props.slug}/page_${totalPages}`}
-          >
-            <i className="fas fa-angle-double-right"></i>
-          </NavLink>
+          <Link className={`${s.page_link} `} to={`/${props.slug}/page_${totalPages}`}>
+            <i className='fas fa-angle-double-right'></i>
+          </Link>
         </li>
       </ul>
     </div>

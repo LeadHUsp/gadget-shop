@@ -14,6 +14,9 @@ class HomePageContainer extends Component {
     this.props.requestCategories();
     this.props.requestBlogItems();
   }
+  componentWillUnmount() {
+    console.log("home unmount");
+  }
   render() {
     return <HomePage {...this.props} />;
   }

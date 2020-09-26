@@ -76,3 +76,13 @@
 
     }
 }
+
+@media (max-width: 360px) {
+    .sort_filter {
+        flex-wrap: wrap;
+
+        ul {
+            flex-wrap: wrap;
+        }
+    }
+}
