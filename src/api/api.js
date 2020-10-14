@@ -25,7 +25,7 @@ export const HomeApi = {
 };
 export const ProductApi = {
   getProducts(slug, currentPage = 1, perPage = 3, params) {
-    return instance.get(`${slug}/?page=${currentPage}&_limit=${perPage}&${params}`);
+    return instance.get(`${slug}/?page=${currentPage}&_limit=${perPage}${params}`);
   },
   getProductsWithParams(slug, params) {
     return instance.get(`${slug}/?${params}`);

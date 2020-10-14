@@ -8,41 +8,28 @@ class SortFilter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filter_items: [
+      sort_filter_items: [
         {
           name: " цена по убыванию",
-          type: "&_sort=price:DESC",
-          isActive: false
+          type: "price:DESC",
+          isActive: false,
         },
         {
           name: " цена по возрастанию",
-          type: "&_sort=price:ASC",
-          isActive: false
+          type: "price:ASC",
+          isActive: false,
         },
         {
           name: " сначала новые",
-          type: "&_sort=createdAt:DESC",
-          isActive: false
-        }
-      ]
+          type: "createdAt:DESC",
+          isActive: false,
+        },
+      ],
     };
   }
-
-  shouldComponentUpdate(nextState) {
-    return nextState.filter_items !== this.state.filter_items;
-  }
-
-  onChangeParams = (e) => {
-    let params = `${this.props.checkbox_params}${this.props.price_params}${e.target.type}`;
-    this.props.setSortParams(e.target.type);
-    this.props.requestProductData(
-      this.props.match.params.slug,
-      this.props.match.params.page,
-      3,
-      params
-    );
-    let items = this.state.filter_items.map((item) => {
-      if (e.target.type === item.type) {
+  changeSortItems= (filter_items)=> {
+    let items = this.state.sort_filter_items.map((item) => {
+      if (filter_items === item.type) {
         item.isActive = true;
       } else {
         item.isActive = false;
@@ -50,23 +37,39 @@ class SortFilter extends React.Component {
       return item;
     });
     this.setState({
-      filter_items: items
+      sort_filter_items: items,
     });
+  }
+  onChangeParams = (e) => {    
+    this.props.setSortParams(e.target.type);  
+    this.changeSortItems(e.target.type)
+  
   };
+
+  //lifecycle methods
+  /* shouldComponentUpdate(nextProps) {
+    return nextProps.sort_filter_params !== this.props.sort_filter_params;
+  } */
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.sort_filter_params !== this.props.sort_filter_params) {
+      this.changeSortItems(this.props.sort_filter_params._sort)
+    }
+  }
+  
+ 
   render() {
     return (
       <div className={s.sort_filter}>
-        <div className="d-flex align-items-center">Сортировать:</div>
+        <div className='d-flex align-items-center'>Сортировать:</div>
         <ul>
-          {this.state.filter_items.map((item, index = 0) => {
+          {this.state.sort_filter_items.map((item, index = 0) => {
             return (
               <li
                 key={index++}
                 className={`${item.isActive && s.active}`}
                 onClick={this.onChangeParams}
-                type={item.type}
-              >
-                <i className="fas fa-sort"></i>
+                type={item.type}>
+                <i className='fas fa-sort'></i>
                 {item.name}
               </li>
             );
@@ -78,9 +81,9 @@ class SortFilter extends React.Component {
 }
 let mapStateToProps = (state) => {
   return {
-    sort_params: state.filterProduct.sort_params,
+    sort_filter_params: state.filterProduct.sort_filter_params,
     checkbox_params: state.filterProduct.checkbox_params,
-    price_params: state.filterProduct.price_params
+    price_params: state.filterProduct.price_params,
   };
 };
 export default connect(mapStateToProps, { setSortParams, requestProductData })(

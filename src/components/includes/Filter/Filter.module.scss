@@ -27,25 +27,35 @@
     }
   }
 
-  button {
-    background: #445ee2;
-    border: none;
-    color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    display: block;
-    margin: 0 auto;
 
-    &:focus {
-      outline: none;
-    }
+}
 
-    &:hover {
-      background: darken(#445ee2, 30%);
-    }
+.btn_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.btn_price {
+  background: #445ee2;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-top: 15px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    background: darken(#445ee2, 30%);
   }
 }
+
 
 .filter_item__title {
   font-weight: bold;

@@ -1,17 +1,23 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
+import _ from "lodash";
 import s from "./Filter.module.scss";
 import {
   requestFilterItems,
-  setPriceParams,
+  setLowPriceParam,
+  setHighPriceParam,
   setCheckBoxParams,
   initAddCheckedItems,
   deleteCheckedItem,
+  clearAllCheckedItems,
   pushCheckedItem,
+  setSortParams,
+
 } from "../../../redux/filterProductReducer";
 import { requestProductData } from "../../../redux/productReducer";
-import { withRouter } from "react-router-dom";
 import FilterProduct from "./FilterProduct";
-import { connect } from "react-redux";
 import FilterPrice from "./FilterPrice";
 
 const queryString = require("query-string");
@@ -23,39 +29,81 @@ class FilterProductContainer extends Component {
       isOpen: true,
     };
   }
-  componentDidMount() {
-    let parsedUrl = queryString.parse(this.props.location.search.substr(1), {
-      parseNumbers: true,
-      arrayFormat: "separator",
-      arrayFormatSeparator: "_",
-    });
-    this.props.setCheckBoxParams(parsedUrl);
-    this.props.requestFilterItems(this.props.slug);
 
-    if (window.innerWidth < 576) {
-      this.setState({ isOpen: false });
-    }
-  }
+
   filterItemsShow = () => {
     this.setState((prevState) => {
       return { isOpen: !prevState.isOpen };
     });
   };
 
-  /* Логика => парсим строку урла =>  мапом проходимся по каждому элементу filter_item =>
-  на каждом шаге мапа вызываем цикл for для checkbox => при совпадении item.param и имени свойства checkbox
-  добавляем в item массив checked, где будут указаны выбранные параметры фильтра */
-  pushCheckBoxParamsToUrl = () => {
-    let stringifyUrl = queryString.stringify(this.props.checkbox_params, {
+  clearFilterParams = () => {
+    this.props.setCheckBoxParams({});
+    this.props.setLowPriceParam("");
+    this.props.setHighPriceParam("");    
+    this.props.setSortParams("");
+    this.props.clearAllCheckedItems();
+  };
+  setFilterParamsOnInit = () => {
+    let parsedUrl = queryString.parse(this.props.location.search.substr(1), {
       parseNumbers: true,
       arrayFormat: "separator",
       arrayFormatSeparator: "_",
     });
+   
+    if (_.has(parsedUrl, "price_gt")) {
+      this.props.setLowPriceParam(parsedUrl.price_gt);
+      delete parsedUrl.price_gt;
+    }
+    if (_.has(parsedUrl, "price_lte")) {
+      this.props.setHighPriceParam(parsedUrl.price_lte);
+      delete parsedUrl.price_lte;
+    }
+    if (_.has(parsedUrl,"_sort")) {
+ 
+      this.props.setSortParams(parsedUrl._sort);
+      delete parsedUrl._sort
+    }
+    this.props.setCheckBoxParams(parsedUrl);
+    this.props.requestFilterItems(this.props.match.params.slug);
+  
+  };
+
+  pushFilterParamsToUrl = () => {
+  
+    let stringifyUrl = "";
+    let checkboxParamsString = queryString.stringify(this.props.checkbox_params, {
+      parseNumbers: true,
+      arrayFormat: "separator",
+      arrayFormatSeparator: "_",
+    });
+    if (checkboxParamsString !== "" ) {
+      stringifyUrl = `${checkboxParamsString}`;
+    }
+   
+    if (
+      this.props.price_params.price_gt !== "" ||
+      this.props.price_params.price_lte !== "" 
+    ) {
+      let priceParamsString = queryString.stringify(this.props.price_params, {
+        parseNumbers: true,
+        skipEmptyString: true,
+      });
+     
+      stringifyUrl = `${stringifyUrl}&${priceParamsString}`;
+    }
+    if (this.props.sort_filter_params._sort !== "") {
+      let sortParamString = queryString.stringify(this.props.sort_filter_params);
+      stringifyUrl = `${stringifyUrl}&${sortParamString}`;
+    }
+ 
+   
     this.props.history.push({
-      pathname: `/${this.props.slug}`,
+      pathname: `/${this.props.match.params.slug}`,
       search: `${stringifyUrl}`,
     });
   };
+
   onChangeParams = (e) => {
     let param_name = e.target.name,
       param_value = e.target.value;
@@ -69,7 +117,7 @@ class FilterProductContainer extends Component {
         param_name: param_name,
         param_value: param_value,
       });
-      this.props.initAddCheckedItems();
+     
     }
     if (e.target.checked === true && e.target.type === "checkbox") {
       /* console.log(typeof param_value); */
@@ -77,48 +125,113 @@ class FilterProductContainer extends Component {
         param_name: param_name,
         param_value: param_value,
       });
-      this.props.initAddCheckedItems();
+     
     }
+    this.props.initAddCheckedItems();
+  
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    /* console.log(this.props.filter_items); */
-    if (prevProps.checkbox_params !== this.props.checkbox_params) {
-      /* this.onChangeParams(); */
-      this.pushCheckBoxParamsToUrl();
+  //lifecycle methods
+  componentDidMount() {
+    this.props.requestFilterItems(this.props.match.params.slug);
+    this.setFilterParamsOnInit();
+    if (window.innerWidth < 576) {
+      this.setState({ isOpen: false });
+    }
+  }
+  componentDidUpdate(prevProps, prevState) {    
+   
+/*     console.log(this.props) */
+
+    if (prevProps.checkbox_params !== this.props.checkbox_params || prevProps.sort_filter_params !== this.props.sort_filter_params ) {
+     
+
+      this.pushFilterParamsToUrl();
     }
     if (prevProps.match.params.slug !== this.props.match.params.slug) {
-      this.props.requestFilterItems(this.props.slug);
+      this.props.requestFilterItems(this.props.match.params.slug);
     }
+    if (prevProps.location.search !== this.props.location.search && this.props.location.search === "") {
+      
+      this.clearFilterParams();
+      this.props.initAddCheckedItems();
+ 
+    }
+   
+    
   }
 
   componentWillUnmount() {
-    this.props.setCheckBoxParams("");
+    this.clearFilterParams();
   }
 
   render() {
+    const list = {
+      visible: { opacity: 1 },
+      hidden: { opacity: 0 },
+    };
+
+    const itemAnimation = {
+      visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+          delay: 0.7,
+        },
+      },
+      hidden: {
+        opacity: 0,
+        y: -100,
+      },
+    };
+    const priceAnimation = {
+      visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+          delay: 0.5,
+        },
+      },
+      hidden: {
+        opacity: 0,
+        y: -100,
+      },
+    };
     return (
-      <div className={s.filter_container}>
-        <div className={s.filter_title} onClick={this.filterItemsShow}>
-          <i className='fas fa-filter'></i>
-          <span>Доступные фильтры</span>
-        </div>
-        {this.state.isOpen && (
-          <div>
-            <FilterPrice {...this.props} />
-            {this.props.filter_items &&
-              this.props.filter_items.map((item) => {
-                return (
-                  <FilterProduct
-                    key={item.param}
-                    {...item}
-                    onChangeParams={this.onChangeParams}
-                  />
-                );
-              })}
+      <AnimateSharedLayout>
+        <motion.div layout className={s.filter_container}>
+          <div className={s.filter_title} onClick={this.filterItemsShow}>
+            <i className='fas fa-filter'></i>
+            <span>Доступные фильтры</span>
           </div>
-        )}
-      </div>
+          <AnimatePresence>
+            {this.state.isOpen && (
+              <motion.div layout initial='hidden' animate='visible' variants={list}>
+                <motion.div variants={priceAnimation}>
+                  <FilterPrice
+                    {...this.props}
+                    concatSearchUrl={this.props.concatSearchUrl}
+                    pushFilterParamsToUrl={this.pushFilterParamsToUrl}
+                    clearFilterParams={this.clearFilterParams}
+                  />
+                </motion.div>
+                {this.props.filter_items &&
+                  this.props.filter_items.map((item) => {
+                    return (
+                      <motion.div
+                        layout
+                        exit={{ opacity: 0 }}
+                        variants={itemAnimation}
+                        key={item.param}>
+                        <FilterProduct {...item} onChangeParams={this.onChangeParams} />
+                      </motion.div>
+                    );
+                  })}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      </AnimateSharedLayout>
     );
   }
 }
@@ -128,7 +241,8 @@ let mapStateToProps = (state) => {
     filter_items: state.filterProduct.filter_items,
     checkbox_params: state.filterProduct.checkbox_params,
     price_params: state.filterProduct.price_params,
-    sort_params: state.filterProduct.sort_params,
+
+    sort_filter_params: state.filterProduct.sort_filter_params,
   };
 };
 
@@ -136,8 +250,12 @@ export default connect(mapStateToProps, {
   requestFilterItems,
   requestProductData,
   setCheckBoxParams,
-  setPriceParams,
+  setLowPriceParam,
+  setHighPriceParam,
   initAddCheckedItems,
   deleteCheckedItem,
+  clearAllCheckedItems,
   pushCheckedItem,
+  setSortParams,
+
 })(withRouter(FilterProductContainer));

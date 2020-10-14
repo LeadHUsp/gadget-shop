@@ -68,7 +68,7 @@ export const requestProductData = (slug, currentPage, perPage, params = "") => {
   return async (dispatch) => {
     try {
       let response = await ProductApi.getProducts(slug, currentPage, perPage, params);
-      /*  console.log(response); */
+      /* console.log(response); */
       dispatch(setProductData(response.data));
       dispatch(setTotalPages(response.headers.x_totalpages));
       dispatch(setIsLoading());
