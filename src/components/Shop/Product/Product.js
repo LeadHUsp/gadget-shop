@@ -6,17 +6,19 @@ import AddToCartButton from "../AddToCartButton/AddToCartButton";
 
 const Product = (props) => {
   return (
-    <div className='row mx-0 justify-content-around py-xl-4 my-sm-4'>
+    <div className="row mx-0 justify-content-start py-xl-4 my-sm-4">
       {props.products_data.map((item) => (
         <div className={s.product_card} key={item.id}>
           <NavLink
             className={s.product_link}
-            to={`/${props.match.params.slug}/single_product/${item.id}`}>
+            to={`/${props.match.params.slug}/single_product/${item.id}`}
+          >
             <img src={item.card_image} alt={item.title} />
           </NavLink>
           <NavLink
             className={s.product_link}
-            to={`/${props.match.params.slug}/single_product/${item.id}`}>
+            to={`/${props.match.params.slug}/single_product/${item.id}`}
+          >
             {item.brand} {item.series}
           </NavLink>
           <div className={s.product_price}>Цена: {item.price} грн</div>
@@ -41,7 +43,7 @@ const Product = (props) => {
           />
         </div>
       ))}
-      <Circle customLoading={props.isLoading} color='#f6731c' time={0} />
+      <Circle customLoading={props.isLoading} color="#f6731c" time={0} />
     </div>
   );
 };

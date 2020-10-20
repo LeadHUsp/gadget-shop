@@ -27,7 +27,7 @@ class SortFilter extends React.Component {
       ],
     };
   }
-  changeSortItems= (filter_items)=> {
+  changeSortItems = (filter_items) => {
     let items = this.state.sort_filter_items.map((item) => {
       if (filter_items === item.type) {
         item.isActive = true;
@@ -39,11 +39,10 @@ class SortFilter extends React.Component {
     this.setState({
       sort_filter_items: items,
     });
-  }
-  onChangeParams = (e) => {    
-    this.props.setSortParams(e.target.type);  
-    this.changeSortItems(e.target.type)
-  
+  };
+  onChangeParams = (e) => {
+    this.props.setSortParams(e.target.type);
+    this.changeSortItems(e.target.type);
   };
 
   //lifecycle methods
@@ -52,15 +51,14 @@ class SortFilter extends React.Component {
   } */
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.sort_filter_params !== this.props.sort_filter_params) {
-      this.changeSortItems(this.props.sort_filter_params._sort)
+      this.changeSortItems(this.props.sort_filter_params._sort);
     }
   }
-  
- 
+
   render() {
     return (
       <div className={s.sort_filter}>
-        <div className='d-flex align-items-center'>Сортировать:</div>
+        <div className={s.title}>Сортировать:</div>
         <ul>
           {this.state.sort_filter_items.map((item, index = 0) => {
             return (
@@ -68,8 +66,9 @@ class SortFilter extends React.Component {
                 key={index++}
                 className={`${item.isActive && s.active}`}
                 onClick={this.onChangeParams}
-                type={item.type}>
-                <i className='fas fa-sort'></i>
+                type={item.type}
+              >
+                <i className="fas fa-sort"></i>
                 {item.name}
               </li>
             );

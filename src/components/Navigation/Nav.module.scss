@@ -6,6 +6,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   position: relative;
+  font-size: 14px;
 }
 
 .nav_brand {
@@ -28,23 +29,18 @@
   color: #ffffff;
 
   margin: 25px 0;
-
 }
 
 .nav_items_wrapper {
   display: flex;
-  justify-content: center;
+
   align-items: center;
-  flex: 0 0 60%;
-  max-width: 60%;
 }
 
 .nav_link {
   display: block;
   padding: 0 15px;
 }
-
-
 
 .search_box {
   flex: 0 0 30%;
@@ -66,7 +62,6 @@
   i {
     position: absolute;
     right: 0;
-
   }
 }
 
@@ -74,7 +69,6 @@
   flex: 0 0 10%;
   max-width: 10%;
 }
-
 
 .index {
   position: relative;
@@ -102,15 +96,10 @@
   display: flex !important;
 }
 
-@media (min-width: 0) and (max-width: 1199px) {
-  .nav_bar {
-    justify-content: space-evenly;
-  }
-
+@media (max-width: 1199px) {
   .menu_toggle {
     display: flex;
   }
-
 
   .nav_items_wrapper {
     width: 100%;
@@ -137,7 +126,6 @@
     a {
       color: #ffffff;
     }
-
   }
 
   .search_box {
@@ -147,7 +135,6 @@
     div {
       width: 100%;
     }
-
   }
 
   .cart {

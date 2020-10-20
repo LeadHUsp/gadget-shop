@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import { requestProductData, setProductData } from "../../../redux/productReducer";
+import {
+  requestProductData,
+  setProductData,
+} from "../../../redux/productReducer";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Product from "./Product";
@@ -10,7 +13,7 @@ import SortFilter from "../../includes/SortFilter/SortFilter";
 const queryString = require("query-string");
 
 class ProductContainer extends Component {
-  concatSearchUrl =()=> {
+  concatSearchUrl = () => {
     let checkboxparams = queryString.stringify(this.props.checkbox_params);
     let price_params = queryString.stringify(this.props.price_params, {
       parseNumbers: true,
@@ -23,37 +26,34 @@ class ProductContainer extends Component {
     if (price_params !== "") {
       searchUrl = `${searchUrl}&${price_params}`;
     }
-    if (this.props.sort_filter_params._sort!== "") {
-      searchUrl = `${searchUrl}&_sort=${this.props.sort_filter_params._sort}`
+    if (this.props.sort_filter_params._sort !== "") {
+      searchUrl = `${searchUrl}&_sort=${this.props.sort_filter_params._sort}`;
     }
-    return searchUrl
-  }
-  
-
+    return searchUrl;
+  };
 
   componentDidUpdate(prevProps) {
-
     let searchUrl = this.concatSearchUrl();
     if (
       prevProps.match.params.page !== this.props.match.params.page ||
-      prevProps.match.params.slug !== this.props.match.params.slug 
-  
+      prevProps.match.params.slug !== this.props.match.params.slug
     ) {
-      /* console.log(this.props); */  
-        this.props.requestProductData(
-          this.props.match.params.slug,
-          this.props.match.params.page || 1,
-          3,
-          searchUrl
-        );
-   
+      /* console.log(this.props); */
+      this.props.requestProductData(
+        this.props.match.params.slug,
+        this.props.match.params.page || 1,
+        4,
+        searchUrl
+      );
     }
-    if (prevProps.checkbox_params !== this.props.checkbox_params  || prevProps.sort_filter_params !== this.props.sort_filter_params) {
-  
+    if (
+      prevProps.checkbox_params !== this.props.checkbox_params ||
+      prevProps.sort_filter_params !== this.props.sort_filter_params
+    ) {
       this.props.requestProductData(
         this.props.match.params.slug,
         1,
-        3,
+        4,
         searchUrl
       );
     }
@@ -63,21 +63,22 @@ class ProductContainer extends Component {
     }
   }
   componentWillUnmount() {
-    this.props.setProductData([])
+    this.props.setProductData([]);
   }
-  
 
   render() {
     return (
-      <div className='container'>
-        <div className='row'> 
-         <div className={`col-lg-3 col-sm-12 `}>
-            <FilterProductContainer
-             concatSearchUrl={this.concatSearchUrl}/>
+      <div className="container">
+        <div className="row">
+          <div className={`col-lg-3 col-sm-12 `}>
+            <FilterProductContainer concatSearchUrl={this.concatSearchUrl} />
           </div>
           <div className={`col-lg-9 col-sm-12 ${s.catalog}`}>
             <SortFilter {...this.props} />
-            <Product {...this.props} saveProductToCart={this.saveProductToCart} />
+            <Product
+              {...this.props}
+              saveProductToCart={this.saveProductToCart}
+            />
             <Pagination
               {...this.props}
               slug={this.props.match.params.slug}
@@ -104,6 +105,6 @@ let mapStateToProps = (state) => {
 export default withRouter(
   connect(mapStateToProps, {
     requestProductData,
-    setProductData
+    setProductData,
   })(ProductContainer)
 );

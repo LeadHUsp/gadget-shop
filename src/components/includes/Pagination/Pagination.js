@@ -25,8 +25,14 @@ const Pagination = (props) => {
     <div className={s.pagination_container}>
       <ul>
         <li>
-          <Link className={`${s.page_link} `} to={`/${props.slug}/page_1`}>
-            <i className='fas fa-angle-double-left'></i>
+          <Link
+            className={`${s.page_link} `}
+            to={(location) => ({
+              ...location,
+              pathname: `/${props.slug}/page_1`,
+            })}
+          >
+            <i className="fas fa-angle-double-left"></i>
           </Link>
         </li>
         {pages.map((page) =>
@@ -40,15 +46,22 @@ const Pagination = (props) => {
                 to={(location) => ({
                   ...location,
                   pathname: `/${props.slug}/page_${page}`,
-                })}>
+                })}
+              >
                 {page}
               </Link>
             </li>
           )
         )}
         <li>
-          <Link className={`${s.page_link} `} to={`/${props.slug}/page_${totalPages}`}>
-            <i className='fas fa-angle-double-right'></i>
+          <Link
+            className={`${s.page_link} `}
+            to={(location) => ({
+              ...location,
+              pathname: `/${props.slug}/page_${totalPages}`,
+            })}
+          >
+            <i className="fas fa-angle-double-right"></i>
           </Link>
         </li>
       </ul>

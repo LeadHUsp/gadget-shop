@@ -26,14 +26,11 @@
       padding: 5px 0;
     }
   }
-
-
 }
 
 .btn_wrapper {
   display: flex;
   flex-wrap: wrap;
-
 }
 
 .btn_price {
@@ -55,7 +52,6 @@
     background: darken(#445ee2, 30%);
   }
 }
-
 
 .filter_item__title {
   font-weight: bold;
@@ -156,7 +152,7 @@
       &:checked {
         --s: 11px;
 
-        &+svg {
+        & + svg {
           animation: bounce 0.4s linear forwards 0.2s;
         }
       }
@@ -179,5 +175,11 @@
 
   100% {
     transform: scale(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .filter_container {
+    margin-bottom: 15px;
   }
 }

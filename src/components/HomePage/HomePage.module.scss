@@ -2,10 +2,13 @@ $bg: #f3f8fa;
 $white: #fff;
 $black: #282936;
 
-@mixin transition($property: all, $duration: 0.45s, $ease: cubic-bezier(0.65, 0, .076, 1)) {
+@mixin transition(
+  $property: all,
+  $duration: 0.45s,
+  $ease: cubic-bezier(0.65, 0, 0.076, 1)
+) {
   transition: $property $duration $ease;
 }
-
 
 .swiper_wrapper {
   height: 400px;
@@ -21,7 +24,6 @@ $black: #282936;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-
 }
 
 .slide_description {
@@ -37,11 +39,9 @@ $black: #282936;
       color: $black;
     }
   }
-
 }
 
 .link {
-
   display: flex;
   text-transform: uppercase;
   background-color: #ffffff;
@@ -97,6 +97,7 @@ $black: #282936;
 }
 
 .blog_link {
+  min-height: 250px;
   display: block;
   width: 100%;
 }
@@ -104,8 +105,6 @@ $black: #282936;
 .description {
   width: 100%;
 }
-
-
 
 .learn_more {
   &:hover {
@@ -140,7 +139,7 @@ $black: #282936;
   font-family: inherit;
 
   .circle {
-    @include transition(all, 0.45s, cubic-bezier(0.65, 0, .076, 1));
+    @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
     position: relative;
     display: block;
     margin: 0;
@@ -150,7 +149,7 @@ $black: #282936;
     border-radius: 1.625rem;
 
     .icon {
-      @include transition(all, 0.45s, cubic-bezier(0.65, 0, .076, 1));
+      @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
       position: absolute;
       top: 0;
       bottom: 0;
@@ -158,7 +157,7 @@ $black: #282936;
       background: $white;
 
       &.arrow {
-        @include transition(all, 0.45s, cubic-bezier(0.65, 0, .076, 1));
+        @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
         left: 0.625rem;
         width: 1.125rem;
         height: 0.125rem;
@@ -166,7 +165,7 @@ $black: #282936;
 
         &::before {
           position: absolute;
-          content: '';
+          content: "";
           top: -0.25rem;
           right: 0.0625rem;
           width: 0.625rem;
@@ -180,7 +179,7 @@ $black: #282936;
   }
 
   .button_text {
-    @include transition(all, 0.45s, cubic-bezier(0.65, 0, .076, 1));
+    @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
     position: absolute;
     top: 0;
     left: 0;
@@ -195,8 +194,15 @@ $black: #282936;
     text-transform: uppercase;
   }
 }
-
-@media (min-width: 0) and (max-width: 576px) {
+@media (max-width: 1200px) {
+  .slide_image {
+    width: 55%;
+  }
+  .slide_description {
+    width: 45%;
+  }
+}
+@media (max-width: 991px) {
   .slide_image {
     width: 100%;
   }

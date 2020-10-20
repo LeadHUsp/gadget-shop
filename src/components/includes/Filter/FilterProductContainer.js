@@ -18,7 +18,7 @@ import {
 } from "../../../redux/filterProductReducer";
 import { requestProductData } from "../../../redux/productReducer";
 import FilterProduct from "./FilterProduct";
-import FilterPrice from "./FilterPrice";
+import FilterPrice from "./FilterPrice.jsx";
 
 const queryString = require("query-string");
 
@@ -68,7 +68,7 @@ class FilterProductContainer extends Component {
     this.props.requestFilterItems(this.props.match.params.slug);
   
   };
-
+ 
   pushFilterParamsToUrl = () => {
   
     let stringifyUrl = "";
@@ -209,6 +209,7 @@ class FilterProductContainer extends Component {
               <motion.div layout initial='hidden' animate='visible' variants={list}>
                 <motion.div variants={priceAnimation}>
                   <FilterPrice
+
                     {...this.props}
                     concatSearchUrl={this.props.concatSearchUrl}
                     pushFilterParamsToUrl={this.pushFilterParamsToUrl}

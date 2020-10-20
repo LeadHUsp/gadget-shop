@@ -1,4 +1,5 @@
-$grid-breakpoints: (xs: 0,
+$grid-breakpoints: (
+  xs: 0,
   sm: 576px,
   md: 768px,
   lg: 992px,
@@ -6,7 +7,8 @@ $grid-breakpoints: (xs: 0,
   xxl: 1600px,
 );
 
-$container-max-widths: (sm: 540px,
+$container-max-widths: (
+  sm: 540px,
   md: 720px,
   lg: 960px,
   xl: 1140px,
@@ -17,9 +19,8 @@ $container-max-widths: (sm: 540px,
 $themeColor: #f6731c;
 
 .swiper-pagination-progressbar {
-
-  .swiper-container-horizontal>&,
-  .swiper-container-vertical>&.swiper-pagination-progressbar-opposite {
+  .swiper-container-horizontal > &,
+  .swiper-container-vertical > &.swiper-pagination-progressbar-opposite {
     width: 100%;
     height: 4px;
     left: 0;
@@ -74,7 +75,7 @@ button,
 input {
   font-family: Montserrat-Regular;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.7;
   color: #666666;
   margin: 0px;
