@@ -42,6 +42,9 @@
   cursor: pointer;
   display: block;
   width: 100%;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 15px;
 
   &:focus {
@@ -178,7 +181,7 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 992px) {
   .filter_container {
     margin-bottom: 15px;
   }

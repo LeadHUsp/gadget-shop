@@ -46,3 +46,8 @@
 h4 {
   text-align: center;
 }
+@media (max-width: 992px) {
+  .order_form {
+    padding-top: 0;
+  }
+}

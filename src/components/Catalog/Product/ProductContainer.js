@@ -1,16 +1,13 @@
-import React, { Component } from "react";
-import {
-  requestProductData,
-  setProductData,
-} from "../../../redux/productReducer";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import Product from "./Product";
-import Pagination from "../../includes/Pagination/Pagination";
-import s from "./Product.module.scss";
-import FilterProductContainer from "../../includes/Filter/FilterProductContainer";
-import SortFilter from "../../includes/SortFilter/SortFilter";
-const queryString = require("query-string");
+import React, { Component } from 'react';
+import { requestProductData, setProductData } from '../../../redux/productReducer';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import Product from './Product';
+import Pagination from '../../includes/Pagination/Pagination';
+import s from './Product.module.scss';
+import FilterProductContainer from '../../includes/Filter/FilterProductContainer';
+import SortFilter from '../../includes/SortFilter/SortFilter';
+const queryString = require('query-string');
 
 class ProductContainer extends Component {
   concatSearchUrl = () => {
@@ -19,14 +16,14 @@ class ProductContainer extends Component {
       parseNumbers: true,
       skipEmptyString: true,
     });
-    let searchUrl = "";
-    if (checkboxparams !== "") {
+    let searchUrl = '';
+    if (checkboxparams !== '') {
       searchUrl = `&${checkboxparams}`;
     }
-    if (price_params !== "") {
+    if (price_params !== '') {
       searchUrl = `${searchUrl}&${price_params}`;
     }
-    if (this.props.sort_filter_params._sort !== "") {
+    if (this.props.sort_filter_params._sort !== '') {
       searchUrl = `${searchUrl}&_sort=${this.props.sort_filter_params._sort}`;
     }
     return searchUrl;
@@ -50,12 +47,7 @@ class ProductContainer extends Component {
       prevProps.checkbox_params !== this.props.checkbox_params ||
       prevProps.sort_filter_params !== this.props.sort_filter_params
     ) {
-      this.props.requestProductData(
-        this.props.match.params.slug,
-        1,
-        4,
-        searchUrl
-      );
+      this.props.requestProductData(this.props.match.params.slug, 1, 4, searchUrl);
     }
 
     if (this.props.location.pathname !== prevProps.location.pathname) {
@@ -68,17 +60,14 @@ class ProductContainer extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className={`col-lg-3 col-sm-12 `}>
+      <div className='container'>
+        <div className='row'>
+          <div className={`col-lg-4 col-xl-3  col-sm-12 `}>
             <FilterProductContainer concatSearchUrl={this.concatSearchUrl} />
           </div>
-          <div className={`col-lg-9 col-sm-12 ${s.catalog}`}>
+          <div className={`col-lg-8 col-xl-9  col-sm-12 ${s.catalog}`}>
             <SortFilter {...this.props} />
-            <Product
-              {...this.props}
-              saveProductToCart={this.saveProductToCart}
-            />
+            <Product {...this.props} saveProductToCart={this.saveProductToCart} />
             <Pagination
               {...this.props}
               slug={this.props.match.params.slug}
