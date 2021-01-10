@@ -5,10 +5,10 @@ import HomePageContainer from "./components/HomePage/HomePageContainer";
 import "./main.scss";
 import { Circle } from "react-preloaders";
 const ProductContainer = React.lazy(() =>
-  import("./components/Shop/Product/ProductContainer")
+  import("./components/Catalog/Product/ProductContainer")
 );
 const SingleProductContainer = React.lazy(() =>
-  import("./components/Shop/SingleProduct/SingleProductContainer")
+  import("./components/Catalog/SingleProduct/SingleProductContainer")
 );
 const ShopingCartContainer = React.lazy(() =>
   import("./components/ShopingCart/ShopingCartContainer")
@@ -26,13 +26,13 @@ class App extends Component {
       <Router>
         <NavContainer />
         <Switch>
-          <Route exact path='/' render={() => <HomePageContainer />} />
+          <Route exact path="/" render={() => <HomePageContainer />} />
           <Route
             exact
-            path='/shoping_cart'
+            path="/shoping_cart"
             render={() => {
               return (
-                <Suspense fallback={<Circle color='#f6731c' />}>
+                <Suspense fallback={<Circle color="#f6731c" />}>
                   <ShopingCartContainer />
                 </Suspense>
               );
@@ -40,10 +40,10 @@ class App extends Component {
           />
           <Route
             exact
-            path='/:slug'
+            path="/:slug"
             render={() => {
               return (
-                <Suspense fallback={<Circle color='#f6731c' />}>
+                <Suspense fallback={<Circle color="#f6731c" />}>
                   <ProductContainer />
                 </Suspense>
               );
@@ -51,10 +51,10 @@ class App extends Component {
           />
           <Route
             exact
-            path='/:slug/page_:page'
+            path="/:slug/page_:page"
             render={() => {
               return (
-                <Suspense fallback={<Circle color='#f6731c' />}>
+                <Suspense fallback={<Circle color="#f6731c" />}>
                   <ProductContainer />
                 </Suspense>
               );
@@ -62,10 +62,10 @@ class App extends Component {
           />
           <Route
             exact
-            path='/:slug/single_product/:id'
+            path="/:slug/single_product/:id"
             render={() => {
               return (
-                <Suspense fallback={<Circle color='#f6731c' />}>
+                <Suspense fallback={<Circle color="#f6731c" />}>
                   <SingleProductContainer />
                 </Suspense>
               );
@@ -73,10 +73,10 @@ class App extends Component {
           />
           <Route
             exact
-            path='/:slug/page_:page/single_product/:id'
+            path="/:slug/page_:page/single_product/:id"
             render={() => {
               return (
-                <Suspense fallback={<Circle color='#f6731c' />}>
+                <Suspense fallback={<Circle color="#f6731c" />}>
                   <SingleProductContainer />
                 </Suspense>
               );

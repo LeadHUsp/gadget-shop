@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import s from "./Product.module.scss";
 import { Circle } from "react-preloaders";
-import AddToCartButton from "../AddToCartButton/AddToCartButton";
+import AddToCartButton from "../../includes/AddToCartButton/AddToCartButton";
 
 const Product = (props) => {
   return (

@@ -17,7 +17,11 @@ class SingleProductContainer extends Component {
   render() {
     return (
       <>
-        <SingleProduct {...this.props.single_product_data} />
+        <SingleProduct
+          {...this.props.single_product_data}
+          product_id={this.props.match.params.id}
+          slug={this.props.match.params.slug}
+        />
       </>
     );
   }
@@ -25,7 +29,7 @@ class SingleProductContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    single_product_data: state.products.single_product_data
+    single_product_data: state.products.single_product_data,
   };
 };
 
